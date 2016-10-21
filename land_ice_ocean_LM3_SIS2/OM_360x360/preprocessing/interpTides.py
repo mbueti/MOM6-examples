@@ -104,7 +104,7 @@ S.add_field_from_array(umod,'umod',var_dict=vdict)
 
 sgrid=supergrid(file='ocean_hgrid.nc',cyclic_x=True,tripolar_n=True)
 output_grid = quadmesh(supergrid=sgrid,cyclic=True)
-output_grid.D=nc.Dataset('topog.nc').variables['depth'][:]
+output_grid.D=nc.Dataset('topog.nc').variables['deptho'][:]
 output_grid.wet = np.zeros(output_grid.D.shape)
 output_grid.wet[output_grid.D>0.]=1.
 

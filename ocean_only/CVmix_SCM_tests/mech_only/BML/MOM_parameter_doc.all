@@ -48,9 +48,6 @@ H_TO_M = 1.0                    !   [m H-1] default = 1.0
                                 ! units of thickness into m.
 NK = 63                         !   [nondim]
                                 ! The number of model layers.
-AVAILABLE_DIAGS_FILE = "available_diags.000000" ! default = "available_diags.000000"
-                                ! A file into which to write a list of all available
-                                ! ocean diagnostics that can be included in a diag_table.
 
 ! === module MOM ===
 VERBOSITY = 2                   ! default = 2
@@ -217,8 +214,12 @@ USE_USER_TRACER_EXAMPLE = False !   [Boolean] default = False
                                 ! If true, use the USER_tracer_example tracer package.
 USE_DOME_TRACER = False         !   [Boolean] default = False
                                 ! If true, use the DOME_tracer tracer package.
+USE_ISOMIP_TRACER = False       !   [Boolean] default = False
+                                ! If true, use the ISOMIP_tracer tracer package.
 USE_IDEAL_AGE_TRACER = False    !   [Boolean] default = False
                                 ! If true, use the ideal_age_example tracer package.
+USE_REGIONAL_DYES = False       !   [Boolean] default = False
+                                ! If true, use the regional_dyes tracer package.
 USE_OIL_TRACER = False          !   [Boolean] default = False
                                 ! If true, use the oil_tracer tracer package.
 USE_ADVECTION_TEST_TRACER = False !   [Boolean] default = False
@@ -428,6 +429,9 @@ APPLY_OBC_U = False             !   [Boolean] default = False
 APPLY_OBC_V = False             !   [Boolean] default = False
                                 ! If true, open boundary conditions may be set at some
                                 ! v-points, with the configuration controlled by OBC_CONFIG
+AVAILABLE_DIAGS_FILE = "available_diags.000000" ! default = "available_diags.000000"
+                                ! A file into which to write a list of all available
+                                ! ocean diagnostics that can be included in a diag_table.
 DIAG_REMAP_Z_GRID_DEF = ""      ! default = ""
                                 ! This sets the file and variable names that define the
                                 ! vertical grid used for diagnostic output remapping to
@@ -493,7 +497,7 @@ LINEAR_DRAG = False             !   [Boolean] default = False
 DOUBLE_DIFFUSION = False        !   [Boolean] default = False
                                 ! If true, increase diffusivitives for temperature or salt
                                 ! based on double-diffusive paramaterization from MOM4/KPP.
-PRANDTL_TURB = 0.0              !   [nondim] default = 0.0
+PRANDTL_TURB = 1.0              !   [nondim] default = 1.0
                                 ! The turbulent Prandtl number applied to shear
                                 ! instability.
 DYNAMIC_VISCOUS_ML = False      !   [Boolean] default = False

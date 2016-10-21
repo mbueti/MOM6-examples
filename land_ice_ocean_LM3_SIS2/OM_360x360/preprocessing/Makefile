@@ -1,18 +1,7 @@
-# Makefile to create supergrid.nc and interpolated_topog.nc
-# To use:
-#   module load python/2.7.3_workstation
-#   module load nco/4.3.1
-#   module load netcdf/4.2
-#   module load mpich2/1.2.1p1
-#   module load intel_compilers/15.0.1
-# then
-#   make all
-
-
 SHELL=bash -f
 NP=8
 
-all: input forcing obs ocean_mosaic c48_mosaic
+all: input forcing obs ocean_mosaic c48_mosaic c96_mosaic c192_mosaic
 	md5sum -c md5sums.txt
 
 showenv:
@@ -62,7 +51,6 @@ WOA05_ptemp_salt_monthly.nc: ocean_hgrid.nc topog.nc /archive/gold/datasets/obs/
 
 seawifs.nc: ocean_hgrid.nc topog.nc /archive/mjh/gold/datasets/obs/SeaWifs/SeaWiFS_Non_Elnino_clim.nc interpCHL.py 
 	ulimit; source activate MIDAS; ln -s /archive/mjh/gold/datasets/obs/SeaWifs/SeaWiFS_Non_Elnino_clim.nc .;  python interpCHL.py
-#	ncatted -h -a modulo,TIME,c,c,' ' seawifs.nc
 
 tidal_amplitude.nc: DATA interpTides.py 
 	ulimit; source activate MIDAS; python interpTides.py
@@ -121,28 +109,32 @@ C48_MOSAIC = $(foreach f,C48_grid.tile1.nc C48_grid.tile2.nc C48_grid.tile3.nc C
                          C48_mosaic_tile3XC48_mosaic_tile3.cdl C48_mosaic_tile3Xocean_mosaic_tile1.cdl C48_mosaic_tile4XC48_mosaic_tile4.cdl C48_mosaic_tile4Xocean_mosaic_tile1.cdl\
                          C48_mosaic_tile5XC48_mosaic_tile5.cdl C48_mosaic_tile5Xocean_mosaic_tile1.cdl C48_mosaic_tile6XC48_mosaic_tile6.cdl C48_mosaic_tile6Xocean_mosaic_tile1.cdl\
                          land_mask_tile1.cdl land_mask_tile2.cdl land_mask_tile3.cdl land_mask_tile4.cdl land_mask_tile5.cdl land_mask_tile6.cdl\
-                         mosaic.cdl ocean_mask.cdl hydrography.tile1.nc hydrography.tile2.nc hydrography.tile3.nc hydrography.tile4.nc hydrography.tile5.nc\
-                         hydrography.tile6.nc,mosaic_c48.360x360/$f)
+                         mosaic.cdl ocean_mask.cdl river_data.tile1.nc river_data.tile2.nc river_data.tile3.nc river_data.tile4.nc river_data.tile5.nc\
+                         river_data.tile6.nc,mosaic_c48.360x360/$f)
 
 C96_MOSAIC = $(foreach f,C96_grid.tile1.nc C96_grid.tile2.nc C96_grid.tile3.nc C96_grid.tile4.nc C96_grid.tile5.nc C96_grid.tile6.nc C96_mosaic.nc\
                          C96_mosaic_tile1XC96_mosaic_tile1.cdl C96_mosaic_tile1Xocean_mosaic_tile1.cdl C96_mosaic_tile2XC96_mosaic_tile2.cdl C96_mosaic_tile2Xocean_mosaic_tile1.cdl\
                          C96_mosaic_tile3XC96_mosaic_tile3.cdl C96_mosaic_tile3Xocean_mosaic_tile1.cdl C96_mosaic_tile4XC96_mosaic_tile4.cdl C96_mosaic_tile4Xocean_mosaic_tile1.cdl\
                          C96_mosaic_tile5XC96_mosaic_tile5.cdl C96_mosaic_tile5Xocean_mosaic_tile1.cdl C96_mosaic_tile6XC96_mosaic_tile6.cdl C96_mosaic_tile6Xocean_mosaic_tile1.cdl\
                          land_mask_tile1.cdl land_mask_tile2.cdl land_mask_tile3.cdl land_mask_tile4.cdl land_mask_tile5.cdl land_mask_tile6.cdl\
-                         mosaic.cdl ocean_mask.cdl hydrography.tile1.nc hydrography.tile2.nc hydrography.tile3.nc hydrography.tile4.nc hydrography.tile5.nc\
-                         hydrography.tile6.nc,mosaic_c96.360x360/$f)
-C192_MOSAIC = $(foreach f,C192_grid.tile1.nc C192_grid.tile2.nc C192_grid.tile3.nc C192_grid.tile4.nc C192_grid.tile5.nc C192_grid.tile6.nc C192_mosaic.nc\
-                          C192_mosaic_tile1XC192_mosaic_tile1.cdl C192_mosaic_tile1Xocean_mosaic_tile1.cdl C192_mosaic_tile2XC192_mosaic_tile2.cdl C192_mosaic_tile2Xocean_mosaic_tile1.cdl\
-                          C192_mosaic_tile3XC192_mosaic_tile3.cdl C192_mosaic_tile3Xocean_mosaic_tile1.cdl C192_mosaic_tile4XC192_mosaic_tile4.cdl C192_mosaic_tile4Xocean_mosaic_tile1.cdl\
-                          C192_mosaic_tile5XC192_mosaic_tile5.cdl C192_mosaic_tile5Xocean_mosaic_tile1.cdl C192_mosaic_tile6XC192_mosaic_tile6.cdl C192_mosaic_tile6Xocean_mosaic_tile1.cdl\
-                          land_mask_tile1.cdl land_mask_tile2.cdl land_mask_tile3.cdl land_mask_tile4.cdl land_mask_tile5.cdl land_mask_tile6.cdl\
-                          mosaic.cdl ocean_mask.cdl,mosaic_c192.360x360/$f)
-ocean_mosaic: $(OCN_MOSAIC) basin_codes.nc
-c48_mosaic: $(C48_MOSAIC)  
-c96_mosaic: $(C96_MOSAIC)
-c192_mosaic: $(C192_MOSAIC)
+                         mosaic.cdl ocean_mask.cdl river_data.tile1.nc river_data.tile2.nc river_data.tile3.nc river_data.tile4.nc river_data.tile5.nc\
+                         river_data.tile6.nc,mosaic_c96.360x360/$f)
 
-$(filter-out mosaic_ocean.360x360/grid_spec.nc mosaic_ocean.360x360/ocean_mosaic.nc,$(OCN_MOSAIC:.cdl=.nc)): mosaic_ocean.360x360/grid_spec.nc
+C192_MOSAIC = $(foreach f,C192_grid.tile1.nc C192_grid.tile2.nc C192_grid.tile3.nc C192_grid.tile4.nc C192_grid.tile5.nc C192_grid.tile6.nc C192_mosaic.nc\
+                         C192_mosaic_tile1XC192_mosaic_tile1.cdl C192_mosaic_tile1Xocean_mosaic_tile1.cdl C192_mosaic_tile2XC192_mosaic_tile2.cdl C192_mosaic_tile2Xocean_mosaic_tile1.cdl\
+                         C192_mosaic_tile3XC192_mosaic_tile3.cdl C192_mosaic_tile3Xocean_mosaic_tile1.cdl C192_mosaic_tile4XC192_mosaic_tile4.cdl C192_mosaic_tile4Xocean_mosaic_tile1.cdl\
+                         C192_mosaic_tile5XC192_mosaic_tile5.cdl C192_mosaic_tile5Xocean_mosaic_tile1.cdl C192_mosaic_tile6XC192_mosaic_tile6.cdl C192_mosaic_tile6Xocean_mosaic_tile1.cdl\
+                         land_mask_tile1.cdl land_mask_tile2.cdl land_mask_tile3.cdl land_mask_tile4.cdl land_mask_tile5.cdl land_mask_tile6.cdl\
+                         mosaic.cdl ocean_mask.cdl river_data.tile1.nc river_data.tile2.nc river_data.tile3.nc river_data.tile4.nc river_data.tile5.nc\
+                         river_data.tile6.nc,mosaic_c192.360x360/$f)
+
+ocean_mosaic: $(OCN_MOSAIC) basin_codes.nc
+c48_mosaic: $(C48_MOSAIC)
+c96_mosaic: $(C96_MOSAIC)
+c192_mosaic: $(C192_MOSAIC)  
+
+
+$(filter-out mosaic_ocean.360x360/grid_spec.nc mosaic_ocean.360x360/ocean_mosaic.nc,$(OCN_MOSAIC:.cdl=.nc)): mosaic_ocean.360x360/grid_spec.nc local
 mosaic_ocean.360x360/ocean_mosaic.nc: ocean_hgrid.nc topog.nc $(FRE_NCTOOLS)/make_solo_mosaic/make_solo_mosaic  $(FRE_NCTOOLS)/make_quick_mosaic/make_quick_mosaic
 	mkdir -p $(@D)
 	(cd $(@D); ln -sf ../ocean_hgrid.nc ../topog.nc .)
@@ -166,7 +158,43 @@ mosaic_c48.360x360/mosaic.nc: mosaic_ocean.360x360/ocean_mosaic.nc topog.nc $(FR
 	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib; touch input.nml;../$(FRE_NCTOOLS)/simple_hydrography/cr_lake_files < ../rnfs2.txt)
 	(cd $(@D); source activate NCO; for t in 1 2 3 4 5 6; do (mv river_network.tile$${t}.nc river_data.tile$${t}.nc; ncks -A -a -v  lake_frac,lake_depth_sill,lake_tau,WaterBod,PWetland,connected_to_next,whole_lake_area,max_slope_to_next lake_frac.tile$${t}.nc river_data.tile$${t}.nc);done)
 	(cd $(@D); python ../check_land.py > river_check.txt)
-	(cd $(@D); cp mosaic.nc grid_spec.nc; tar cvhf ../$(@D).tar $(wildcard C48_mosaic*.nc horizontal_grid*.nc ocean_*.nc land_mask*.nc river_data*.nc) grid_spec.nc topog.nc)
+#	(cd $(@D); cp mosaic.nc grid_spec.nc; tar cvhf ../$(@D).tar $(wildcard C48_mosaic*.nc horizontal_grid*.nc ocean_*.nc land_mask*.nc river_data*.nc) grid_spec.nc topog.nc)
+
+$(filter-out mosaic_c96.360x360/mosaic.nc,$(C96_MOSAIC:.cdl=.nc)): mosaic_c96.360x360/mosaic.nc local
+mosaic_c96.360x360/mosaic.nc: mosaic_ocean.360x360/ocean_mosaic.nc topog.nc $(FRE_NCTOOLS)/make_hgrid/make_hgrid $(FRE_NCTOOLS)/make_coupler_mosaic/make_coupler_mosaic  \
+       $(FRE_NCTOOLS)/river_regrid/river_regrid $(FRE_NCTOOLS)/simple_hydrography/cp_river_vars $(FRE_NCTOOLS)/simple_hydrography/rmv_parallel_rivers $(FRE_NCTOOLS)/simple_hydrography/cr_lake_files
+	mkdir -p $(@D)
+	(cd $(@D); ln -sf ../ocean_hgrid.nc ../topog.nc .)
+	(cd $(@D); ln -sf ../mosaic_ocean.360x360/ocean_mosaic.nc .)
+	(cd $(@D);../$(FRE_NCTOOLS)/make_hgrid/make_hgrid --grid_type conformal_cubic_grid --nlon 192 --nratio 2)
+	(cd $(@D);../$(FRE_NCTOOLS)/make_solo_mosaic/make_solo_mosaic --num_tiles 6 --dir . --mosaic_name C96_mosaic --tile_file  horizontal_grid.tile1.nc,horizontal_grid.tile2.nc,horizontal_grid.tile3.nc,horizontal_grid.tile4.nc,horizontal_grid.tile5.nc,horizontal_grid.tile6.nc)
+	(cd $(@D); ../$(FRE_NCTOOLS)/make_coupler_mosaic/make_coupler_mosaic --reproduce_siena --atmos_mosaic C96_mosaic.nc --ocean_mosaic ocean_mosaic.nc --mosaic_name mosaic --ocean_topog topog.nc)
+	(cd $(@D); ../$(FRE_NCTOOLS)/river_regrid/river_regrid --mosaic mosaic.nc --river_src /archive/kap/lmdt/river_network/netcdf/0.5deg/disagg/river_network_mrg_0.5deg_ad3nov_fill_coast_auto1_0.125.nc --min_frac 0.0 --land_thresh 1.e-5)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib; ../$(FRE_NCTOOLS)/simple_hydrography/cp_river_vars < ../rifs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib;../$(FRE_NCTOOLS)/simple_hydrography/rmv_parallel_rivers < ../rnfs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib;../$(FRE_NCTOOLS)/simple_hydrography/cp_river_vars < ../rnfs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib; touch input.nml;../$(FRE_NCTOOLS)/simple_hydrography/cr_lake_files < ../rnfs2.txt)
+	(cd $(@D); source activate NCO; for t in 1 2 3 4 5 6; do (mv river_network.tile$${t}.nc river_data.tile$${t}.nc; ncks -A -a -v  lake_frac,lake_depth_sill,lake_tau,WaterBod,PWetland,connected_to_next,whole_lake_area,max_slope_to_next lake_frac.tile$${t}.nc river_data.tile$${t}.nc);done)
+	(cd $(@D); python ../check_land.py > river_check.txt)
+#	(cd $(@D); cp mosaic.nc grid_spec.nc; tar cvhf ../$(@D).tar $(wildcard C48_mosaic*.nc horizontal_grid*.nc ocean_*.nc land_mask*.nc river_data*.nc) grid_spec.nc topog.nc)
+
+$(filter-out mosaic_c192.360x360/mosaic.nc,$(C192_MOSAIC:.cdl=.nc)): mosaic_c192.360x360/mosaic.nc local
+mosaic_c192.360x360/mosaic.nc: mosaic_ocean.360x360/ocean_mosaic.nc topog.nc $(FRE_NCTOOLS)/make_hgrid/make_hgrid $(FRE_NCTOOLS)/make_coupler_mosaic/make_coupler_mosaic  \
+       $(FRE_NCTOOLS)/river_regrid/river_regrid $(FRE_NCTOOLS)/simple_hydrography/cp_river_vars $(FRE_NCTOOLS)/simple_hydrography/rmv_parallel_rivers $(FRE_NCTOOLS)/simple_hydrography/cr_lake_files
+	mkdir -p $(@D)
+	(cd $(@D); ln -sf ../ocean_hgrid.nc ../topog.nc .)
+	(cd $(@D); ln -sf ../mosaic_ocean.360x360/ocean_mosaic.nc .)
+	(cd $(@D);../$(FRE_NCTOOLS)/make_hgrid/make_hgrid --grid_type conformal_cubic_grid --nlon 384 --nratio 2)
+	(cd $(@D);../$(FRE_NCTOOLS)/make_solo_mosaic/make_solo_mosaic --num_tiles 6 --dir . --mosaic_name C192_mosaic --tile_file  horizontal_grid.tile1.nc,horizontal_grid.tile2.nc,horizontal_grid.tile3.nc,horizontal_grid.tile4.nc,horizontal_grid.tile5.nc,horizontal_grid.tile6.nc)
+	(cd $(@D); ../$(FRE_NCTOOLS)/make_coupler_mosaic/make_coupler_mosaic --reproduce_siena --atmos_mosaic C192_mosaic.nc --ocean_mosaic ocean_mosaic.nc --mosaic_name mosaic --ocean_topog topog.nc)
+	(cd $(@D); ../$(FRE_NCTOOLS)/river_regrid/river_regrid --mosaic mosaic.nc --river_src /archive/kap/lmdt/river_network/netcdf/0.5deg/disagg/river_network_mrg_0.5deg_ad3nov_fill_coast_auto1_0.125.nc --min_frac 0.0 --land_thresh 1.e-5)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib; ../$(FRE_NCTOOLS)/simple_hydrography/cp_river_vars < ../rifs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib;../$(FRE_NCTOOLS)/simple_hydrography/rmv_parallel_rivers < ../rnfs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib;../$(FRE_NCTOOLS)/simple_hydrography/cp_river_vars < ../rnfs.txt)
+	(cd $(@D); source activate MIDAS;export LD_LIBRARY_PATH=$(CONDA_ENV_PATH)/lib; touch input.nml;../$(FRE_NCTOOLS)/simple_hydrography/cr_lake_files < ../rnfs2.txt)
+	(cd $(@D); source activate NCO; for t in 1 2 3 4 5 6; do (mv river_network.tile$${t}.nc river_data.tile$${t}.nc; ncks -A -a -v  lake_frac,lake_depth_sill,lake_tau,WaterBod,PWetland,connected_to_next,whole_lake_area,max_slope_to_next lake_frac.tile$${t}.nc river_data.tile$${t}.nc);done)
+	(cd $(@D); python ../check_land.py > river_check.txt)
+#	(cd $(@D); cp mosaic.nc grid_spec.nc; tar cvhf ../$(@D).tar $(wildcard C48_mosaic*.nc horizontal_grid*.nc ocean_*.nc land_mask*.nc river_data*.nc) grid_spec.nc topog.nc)
 
 %.cdl: %.nc
 	ncdump $< | egrep -v 'code_version|history' > $@
