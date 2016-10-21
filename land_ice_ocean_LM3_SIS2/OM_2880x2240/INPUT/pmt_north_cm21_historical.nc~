@@ -1,0 +1,20 @@
+netcdf PMT_south {
+dimensions:
+	time = UNLIMITED ; // (12 currently)
+variables:
+	double time(time) ;
+		time:units = "days since 1861-01-01 00:00:00" ;
+		time:calendar = "julian" ;
+		time:cartesian_axis = "T" ;
+	float PMT_south(time) ;
+		PMT_south:_FillValue = 1.e+20f ;
+		PMT_south:missing_value = 1.e+20f ;
+		PMT_south:units = "kg m-2 s-1" ;
+data:
+
+ time = 15, 45, 74, 105, 135, 166, 196, 227, 258, 288, 319, 349 ;
+
+ PMT_south = 9.221566e+08, 9.816693e+08, 1.104892e+09, 1.112394e+09, 
+    1.15803e+09, 1.052779e+09, 1.004241e+09, 9.762728e+08, 9.597574e+08, 
+    9.40422e+08, 8.785843e+08, 8.843887e+08 ;
+}

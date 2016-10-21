@@ -1,0 +1,11 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v6.96  
+ ! Linux 3.0.101-0.46-default 64-bit - 06/16/16
+ !  3-Aug-16 12:49     
+
+use pmt_south.nc
+use pmt_south_cm21_historical.nc
+sho da
+list pmt_south[d=1,l=@ave]
+list pmt_south[d=2,l=@ave]
+q
