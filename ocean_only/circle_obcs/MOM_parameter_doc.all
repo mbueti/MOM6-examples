@@ -270,7 +270,6 @@ TOPO_CONFIG = "flat"            !
                                 !     DOME2D - use a shelf and slope configuration for the
                                 !       DOME2D gravity current/overflow test case.
                                 !     seamount - Gaussian bump for spontaneous motion test case.
-                                !     supercritical - flat but with 8.95 degree land mask.
                                 !     Phillips - ACC-like idealized topography used in the Phillips config.
                                 !     USER - call a user modified routine.
 MINIMUM_DEPTH = 1.0             !   [m] default = 0.0
@@ -282,6 +281,21 @@ MAXIMUM_DEPTH = 600.0           !   [m]
 ! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply, if any.
 OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
                                 ! The number of open boundary segments.
+OBC_ZERO_VORTICITY = False      !   [Boolean] default = False
+                                ! If true, sets relative vorticity to zero on open boundaries.
+OBC_FREESLIP_VORTICITY = True   !   [Boolean] default = False
+                                ! If true, sets the normal gradient of tangential velocity to
+                                ! zero in the relative vorticity on open boundaries. This cannot
+                                ! be true if OBC_ZERO_VORTICITY is True.
+OBC_ZERO_STRAIN = False         !   [Boolean] default = False
+                                ! If true, sets the strain used in the stress tensor to zero on open boundaries.
+OBC_FREESLIP_STRAIN = True      !   [Boolean] default = False
+                                ! If true, sets the normal gradient of tangential velocity to
+                                ! zero in the strain use in the stress tensor on open boundaries. This cannot
+                                ! be true if OBC_ZERO_STRAIN is True.
+OBC_ZERO_BIHARMONIC = True      !   [Boolean] default = False
+                                ! If true, zeros the Laplacian of flow on open boundaries in the biharmonic
+                                ! viscosity term.
 OBC_SEGMENT_001 = "J=N,I=N:0,LEGACY,ORLANSKI" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_002 = "J=0,I=0:N,LEGACY,ORLANSKI" !
@@ -418,6 +432,13 @@ OBC_RAD_THICK_WT = 0.2          !   [nondim] default = 0.2
                                 ! time level (1) or the running mean (0) for thicknesses.
                                 ! Valid values range from 0 to 1. This is only used if
                                 ! one of the open boundary segments is using Orlanski.
+OBC_USER_CONFIG = "none"        ! default = "none"
+                                ! A string that sets how the user code is invoked to set open
+                                !  boundary data:
+                                !    DOME - specified inflow on northern boundary
+                                !    tidal_bay - Flather with tidal forcing on eastern boundary
+                                !    supercritical - now only needed here for the allocations
+                                !    USER - user specified
 READ_OBC_UV = False             !   [Boolean] default = False
                                 ! If true, read the values for the velocity open boundary
                                 ! conditions from the file specified by OBC_FILE.
@@ -1283,6 +1304,7 @@ TRACER_ADVECTION_SCHEME = "PLM" ! default = "PLM"
                                 ! The horizontal transport scheme for tracers:
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
+                                !   PPM    - Piecewise Parabolic Method (Colella-Woodward)
 
 ! === module MOM_tracer_hor_diff ===
 KHTR = 0.0                      !   [m2 s-1] default = 0.0

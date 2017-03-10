@@ -310,7 +310,6 @@ TOPO_CONFIG = "flat"            !
                                 !     DOME2D - use a shelf and slope configuration for the
                                 !       DOME2D gravity current/overflow test case.
                                 !     seamount - Gaussian bump for spontaneous motion test case.
-                                !     supercritical - flat but with 8.95 degree land mask.
                                 !     Phillips - ACC-like idealized topography used in the Phillips config.
                                 !     USER - call a user modified routine.
 MINIMUM_DEPTH = 0.5             !   [m] default = 0.0
@@ -1200,6 +1199,9 @@ MSTAR = 1.2                     !   [units=nondim] default = 1.2
 MIX_LEN_EXPONENT = 2.0          !   [units=nondim] default = 2.0
                                 ! The exponent applied to the ratio of the distance to the MLD
                                 ! and the MLD depth which determines the shape of the mixing length.
+MSTAR_CAP = -1.0                !   [units=nondim] default = -1.0
+                                ! Maximum value of mstar allowed in model if non-negative
+                                ! (used if MSTAR_FIXED=false).
 MSTAR_SLOPE = 1.0               !   [units=nondim] default = 1.0
                                 ! The slope of the linear relationship between mstar
                                 ! and the length scale ratio (used if MSTAR_FIXED=false).
@@ -1212,6 +1214,8 @@ MSTAR_AT_XINT = 0.13            !   [units=nondim] default = 0.13
 MSTAR_FIXED = True              !   [units=nondim] default = True
                                 ! True to use a fixed value of mstar, if false mstar depends
                                 ! on the composite Obhukov length and Ekman length.
+MSTAR_FLATCAP = True            !   [units=nondim] default = True
+                                ! Set false to use asmptotic cap or defaults to true to use flat cap.
 NSTAR = 0.2                     !   [nondim] default = 0.2
                                 ! The portion of the buoyant potential energy imparted by
                                 ! surface fluxes that is available to drive entrainment
@@ -1336,6 +1340,7 @@ TRACER_ADVECTION_SCHEME = "PLM" ! default = "PLM"
                                 ! The horizontal transport scheme for tracers:
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
+                                !   PPM    - Piecewise Parabolic Method (Colella-Woodward)
 
 ! === module MOM_tracer_hor_diff ===
 KHTR = 600.0                    !   [m2 s-1] default = 0.0
