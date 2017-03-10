@@ -19,3 +19,5 @@ RESTART
 .ipynb_checkpoints
 # Ignore anything labeled ignore
 *.ignore
+
+ice_ocean_SIS2/OM4_025_hurricane/INPUT/*

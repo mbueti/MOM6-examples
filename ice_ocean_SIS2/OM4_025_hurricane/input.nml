@@ -23,10 +23,10 @@
 /
 
  &coupler_nml
-            months = 1,
+            months = 0,
             days   = 0,
-            hours  = 0,
-            current_date = 1985,1,1,0,0,0,
+            hours  = 6,
+            current_date = 1990,1,1,0,0,0,
             calendar = 'NOLEAP',
             dt_cpld = 1800,
             dt_atmos = 1800,
@@ -55,7 +55,6 @@
             debug_stocks = .FALSE.
             divert_stocks_report = .TRUE.            
             do_area_weighted_flux = .FALSE.
-						do_hurricane = .FALSE.
 /
 
  &fms_io_nml

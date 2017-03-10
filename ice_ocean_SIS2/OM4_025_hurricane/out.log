@@ -8,15 +8,26 @@ NOTE from PE     0: MPP_DOMAINS_SET_STACK_SIZE: stack size set to    32768.
  /
 NOTE from PE     0: MPP_IO_SET_STACK_SIZE: stack size set to     131072.
 NOTE from PE     0: MPP_DOMAINS_SET_STACK_SIZE: stack size set to  5000000.
+ Entering coupler_init at 20170309 224748.874
+ Starting initializing ensemble_manager at 20170309 224748.896
+ Finished initializing ensemble_manager at 20170309 224748.901
 NOTE from PE     0: coupler_init: Atmos PE range:      0   479 ens_01
 NOTE from PE     0: coupler_init: Ocean PE range:      0   479 ens_01
 NOTE from PE     0: coupler_init: Land PE range:      0   479 ens_01
+ Starting to initialize diag_manager at 20170309 224748.924
 NOTE from PE     0: coupler_init: Ice PE range:      0   479 ens_01
 NOTE from PE     0: coupler_init: Running with SERIAL coupling.
 NOTE from PE     0: coupler_init: Sending most recent fluxes to ocean.
+ Finished initializing diag_manager at 20170309 224748.981
 
 WARNING from PE     0: MPP_OPEN: File time_stamp.out opened WRONLY already exists!
 
+
+WARNING from PE     0: MPP_OPEN: File time_stamp.out opened WRONLY already exists!
+
+ Starting to initialize tracer_manager at 20170309 224749.004
+ Finished initializing tracer_manager at 20170309 224749.005
+ Starting to initialize coupler_types at 20170309 224749.005
  
  Dumping coupler_mod/types tree
 types/
@@ -32,6 +43,8 @@ types/
                                    name[1] = 'pcair'
                                    name[2] = 'u10'
                                    name[3] = 'psurf'
+ Finished initializing coupler_types at 20170309 224749.006
+ Beginning to initialize component models at 20170309 224749.006
                                    long_name[1] = 'Atmospheric concentration'
                                    long_name[2] = 'Wind speed at 10 m'
                                    long_name[3] = 'Surface atmospheric pressure'
@@ -133,6 +146,7 @@ types/
                            name = 'flux'
                            long_name = 'Concentration in land runoff'
                            units = 'mol/m^3'
+ Starting to initialize atmospheric model at 20170309 224749.008
  atmos model domain decomposition
 whalo =    1, ehalo =    1, shalo =    1, nhalo =    1
   X-AXIS =   60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60
@@ -141,12 +155,16 @@ whalo =    1, ehalo =    1, shalo =    1, nhalo =    1
 NOTE from PE     0: grid_mod/get_grid_cell_vertices: domain is not present, global data will be read
 NOTE from PE     0: MPP_IO_SET_STACK_SIZE: stack size set to    6225841.
 NOTE from PE     0: grid_mod/get_grid_cell_centers: domain is not present, global data will be read
+ Finished initializing atmospheric model at 20170309 224751.157
+ Starting to initialize land model at 20170309 224751.237
  land model domain decomposition
 whalo =    1, ehalo =    1, shalo =    1, nhalo =    1
   X-AXIS =   60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60
 
   Y-AXIS =   54  54  54  54  54  54  54  54  54  54  54  54  54  54  54  54  54  54  54  54
 NOTE from PE     0: grid_mod/get_grid_cell_centers: domain is not present, global data will be read
+ Finished initializing land model at 20170309 224751.865
+ Starting to initialize ice model at 20170309 224751.948
 NOTE from PE     0: open_param_file: SIS_input has been opened successfully.
 NOTE from PE     0: open_param_file: SIS_layout has been opened successfully.
 NOTE from PE     0: open_param_file: SIS_override has been opened successfully.
@@ -234,10 +252,7 @@ diamonds, grd_chksum2: read_restart_calvi chksum=                     0 chksum2=
 NOTE from PE     0: read_restart_bergs_new: Using new icebergs restart read
 diamonds, bergs_chksum: read_restart bergs chksum=                     0 chksum2=                     0 chksum3=                     0 chksum4=                     0 chksum5=                     0 #=                     0
 diamonds, grd_chksum2:    # of bergs/cell chksum=                     0 chksum2=                     0 min= 0.000000000E+00 max= 0.000000000E+00 mean= 0.000000000E+00 rms= 0.000000000E+00 sd= 0.000000000E+00
-
-WARNING from PE     0: MPP_OPEN: File ./seaice.stats opened WRONLY already exists!
-
-SIS Date   1985/01/01 00:00:00      0: Area 0.000000000000E+00 0.000000000000E+00, Mass  0.00000000000E+00 0.00000000000E+00
+SIS Date   1990/01/01 00:00:00      0: Area 0.000000000000E+00 0.000000000000E+00, Mass  0.00000000000E+00 0.00000000000E+00
  Total Ice Mass:   0.0000000000000000E+00, Change:  0.00000E+00 Error:  0.00000E+00 ( 0.0E+00)
  Total Ice Salt:   0.0000000000000000E+00, Change:  0.00000E+00 Error:  0.00000E+00
  Total Ice Heat:   0.0000000000000000E+00, Change:  0.00000E+00 Error:  0.00000E+00
@@ -247,6 +262,8 @@ NOTE from PE     0: close_param_file: SIS_input has been closed successfully.
 NOTE from PE     0: close_param_file: SIS_layout has been closed successfully.
 NOTE from PE     0: close_param_file: SIS_override has been closed successfully.
 NOTE from PE     0: callTree:    <--- ice_model_init()
+ Finished initializing ice model at 20170309 224753.881
+ Starting to initialize ocean model at 20170309 224753.910
 NOTE from PE     0: callTree:    ---> ocean_model_init(), ocean_model_MOM.F90
 NOTE from PE     0: open_param_file: MOM_input has been opened successfully.
 NOTE from PE     0: open_param_file: MOM_layout has been opened successfully.
@@ -269,29 +286,23 @@ whalo =    9, ehalo =    9, shalo =    9, nhalo =    9
   X-AXIS =   90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90  90
              90  90  90  90  90  90  90  90
   Y-AXIS =  120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120
-Ocean topography edit:    29  889  595  394.39->  500.00  39  60
-Ocean topography edit:    60 1369  560  151.45->  180.00  24  25
-Ocean topography edit:    30  888  595  375.17->  500.00  38  60
-Ocean topography edit:    61 1369  559   97.29->  180.00  24  24
-Ocean topography edit:    31  888  596  222.70->  500.00  38  61
-Ocean topography edit:    62 1370  559   68.19->  180.00  25  24
-Ocean topography edit:    32  887  596  436.80->  500.00  37  61
-Ocean topography edit:    63 1370  558   93.68->  180.00  25  23
-Ocean topography edit:    33  886  596  349.77->  500.00  36  61
-Ocean topography edit:    64 1370  557   80.73->  180.00  25  22
-Ocean topography edit:    34  885  596  169.91->  500.00  35  61
-Ocean topography edit:    65 1371  557  127.90->  180.00  26  22
-Ocean topography edit:    35  885  597  411.25->  500.00  35  62
-Ocean topography edit:    66 1371  556   41.25->  180.00  26  21
-Ocean topography edit:    36  884  597  405.56->  500.00  34  62
-Ocean topography edit:    67 1372  556   96.19->  180.00  27  21
-Ocean topography edit:    37  884  598  462.69->  500.00  34  63
-Ocean topography edit:    68 1372  555   60.64->  180.00  27  20
-Ocean topography edit:    38  883  598  470.05->  500.00  33  63
-Ocean topography edit:    69 1373  555   32.38->  180.00  28  20
-Ocean topography edit:    39  882  598  456.70->  500.00  32  63
-Ocean topography edit:    70 1373  554  112.89->  180.00  28  19
-Ocean topography edit:    71 1373  553   31.54->  180.00  28  18
+Ocean topography edit:    76 1170  805  544.52->  500.00   5  30
+Ocean topography edit:    77 1171  805  513.92->  460.00   6  30
+Ocean topography edit:    78 1172  805  553.43->  490.00   7  30
+Ocean topography edit:    79 1173  805  528.28->  330.00   8  30
+Ocean topography edit:    80 1174  804  499.22->  450.00   9  29
+Ocean topography edit:     1 1166  818  664.73->  800.00  46  43
+Ocean topography edit:     2 1166  817  728.35->  800.00  46  42
+Ocean topography edit:     3 1166  816  557.18->  800.00  46  41
+Ocean topography edit:     4 1167  816  763.71->  800.00  47  41
+Ocean topography edit:     5 1168  816  584.82->  800.00  48  41
+Ocean topography edit:     6 1168  815  771.28->  800.00  48  40
+Ocean topography edit:     7 1168  814  623.90->  800.00  48  39
+Ocean topography edit:     8 1169  814  754.62->  800.00  49  39
+Ocean topography edit:    72 1166  808  599.70->  540.00  46  33
+Ocean topography edit:    73 1167  807  598.73->  510.00  47  32
+Ocean topography edit:    74 1168  807  647.22->  530.00  48  32
+Ocean topography edit:    75 1169  806  583.86->  610.00  49  31
 Ocean topography edit:    40  883  600  457.40->  500.00  33   5
 Ocean topography edit:     9 1176  657  227.78->  280.00  11  62
 Ocean topography edit:    41  881  601  339.21->  500.00  31   6
@@ -309,9 +320,37 @@ Ocean topography edit:    50  879  605  681.07->  730.00  29  10
 Ocean topography edit:    51  878  604  706.24->  730.00  28   9
 Ocean topography edit:    52  878  602  329.73->  730.00  28   7
 Ocean topography edit:    53  884  613  466.71->  600.00  34  18
+Ocean topography edit:    54  885  613  360.50->  600.00  35  18
+Ocean topography edit:    55  881  619  625.10->  710.00  31  24
+Ocean topography edit:    56  881  620  651.12->  710.00  31  25
+Ocean topography edit:    57  881  621  667.51->  710.00  31  26
+Ocean topography edit:    58  881  622  700.03->  710.00  31  27
 Ocean topography edit:    26  944  578 1365.65-> 1850.00  49  43
+Ocean topography edit:    29  889  595  394.39->  500.00  39  60
+Ocean topography edit:    60 1369  560  151.45->  180.00  24  25
 Ocean topography edit:    27  944  577 1234.00-> 1850.00  49  42
+Ocean topography edit:    30  888  595  375.17->  500.00  38  60
+Ocean topography edit:    61 1369  559   97.29->  180.00  24  24
 Ocean topography edit:    28  942  575 1656.42-> 1400.00  47  40
+Ocean topography edit:    62 1370  559   68.19->  180.00  25  24
+Ocean topography edit:    31  888  596  222.70->  500.00  38  61
+Ocean topography edit:    63 1370  558   93.68->  180.00  25  23
+Ocean topography edit:    32  887  596  436.80->  500.00  37  61
+Ocean topography edit:    64 1370  557   80.73->  180.00  25  22
+Ocean topography edit:    33  886  596  349.77->  500.00  36  61
+Ocean topography edit:    65 1371  557  127.90->  180.00  26  22
+Ocean topography edit:    34  885  596  169.91->  500.00  35  61
+Ocean topography edit:    66 1371  556   41.25->  180.00  26  21
+Ocean topography edit:    35  885  597  411.25->  500.00  35  62
+Ocean topography edit:    67 1372  556   96.19->  180.00  27  21
+Ocean topography edit:    36  884  597  405.56->  500.00  34  62
+Ocean topography edit:    68 1372  555   60.64->  180.00  27  20
+Ocean topography edit:    37  884  598  462.69->  500.00  34  63
+Ocean topography edit:    69 1373  555   32.38->  180.00  28  20
+Ocean topography edit:    38  883  598  470.05->  500.00  33  63
+Ocean topography edit:    70 1373  554  112.89->  180.00  28  19
+Ocean topography edit:    39  882  598  456.70->  500.00  32  63
+Ocean topography edit:    71 1373  553   31.54->  180.00  28  18
 Ocean topography edit:    12  953  550  685.97->  730.00  13  15
 Ocean topography edit:    13  952  550  679.21->  730.00  12  15
 Ocean topography edit:    14  952  551  188.74->   40.00  12  16
@@ -326,627 +365,344 @@ Ocean topography edit:    22  955  557  705.76->  900.00  15  22
 Ocean topography edit:    23  956  561  831.60->  950.00  16  26
 Ocean topography edit:    24  956  564  609.99->  800.00  16  29
 Ocean topography edit:    25  955  565  897.07-> 1000.00  15  30
-Ocean topography edit:    54  885  613  360.50->  600.00  35  18
-Ocean topography edit:    55  881  619  625.10->  710.00  31  24
-Ocean topography edit:    56  881  620  651.12->  710.00  31  25
-Ocean topography edit:    57  881  621  667.51->  710.00  31  26
-Ocean topography edit:    58  881  622  700.03->  710.00  31  27
 Ocean topography edit:    59 1424  612   51.14->   80.00  34  17
-Ocean topography edit:     1 1166  818  664.73->  800.00  46  43
-Ocean topography edit:     2 1166  817  728.35->  800.00  46  42
-Ocean topography edit:     3 1166  816  557.18->  800.00  46  41
-Ocean topography edit:     4 1167  816  763.71->  800.00  47  41
-Ocean topography edit:     5 1168  816  584.82->  800.00  48  41
-Ocean topography edit:     6 1168  815  771.28->  800.00  48  40
-Ocean topography edit:     7 1168  814  623.90->  800.00  48  39
-Ocean topography edit:     8 1169  814  754.62->  800.00  49  39
-Ocean topography edit:    72 1166  808  599.70->  540.00  46  33
-Ocean topography edit:    73 1167  807  598.73->  510.00  47  32
-Ocean topography edit:    74 1168  807  647.22->  530.00  48  32
-Ocean topography edit:    75 1169  806  583.86->  610.00  49  31
-Ocean topography edit:    76 1170  805  544.52->  500.00   5  30
-Ocean topography edit:    77 1171  805  513.92->  460.00   6  30
-Ocean topography edit:    78 1172  805  553.43->  490.00   7  30
-Ocean topography edit:    79 1173  805  528.28->  330.00   8  30
-Ocean topography edit:    80 1174  804  499.22->  450.00   9  29
-
-WARNING from PE     0: MEKE_init: Initializing MEKE with a local equilibrium balance.
-
- MOM domain decomposition
-whalo =    4, ehalo =    4, shalo =    4, nhalo =    4
-  X-AXIS =   45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45  45
-             45  45  45  45  45  45  45  45
-  Y-AXIS =   60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60  60
-
-            ======== COMPLETED MOM INITIALIZATION ========
-
- ==>Note from atmos_ocean_fluxes_mod(atmos_ocean_fluxes_init): No gas fluxes
- ==>Note from flux_exchange_mod(flux_exchange_init):
-  Number of exchanged tracers =            1
- Tracer field name :sphum
-NOTE from PE     0: flux_exchange_mod: tracer "co2" not present in the atmosphere
- NOTE from xgrid_mod: use second_order conservative exchange
-NOTE from PE     0: xgrid_mod: reading exchange grid information from mosaic grid file
- Checked data is array of constant 1
- ATM(ATMOCNLND)=  0.993455479799169       0.993455479799170     
-  0.993455479799168     
- OCN(ATMOCNLND)=  0.706790214084558       0.706790214084557     
-  0.706790214084558     
- LND(ATMOCNLND)=  0.286665265714612       0.286665265714612     
-  0.286665265714612     
- Checked data is array of random number between 0 and 1 using second_order
- ATM(ATMOCNLND)=  0.499816188630770       0.499816188630770     
-  0.499816188630770     
- OCN(ATMOCNLND)=  0.353822127118933       0.353822127118933     
-  0.353822127118933     
-PE =    245      Surface exchange size equals one.
- LND(ATMOCNLND)=  0.140899792458847       0.140899792458847     
-  0.140899792458847     
-PE =    464      Surface exchange size equals one.
-NOTE from PE     0: xgrid_mod: reading exchange grid information from mosaic grid file
- Checked data is array of constant 1
- LND(LNDOCN)=  0.706790214084557       0.706790214084558     
-  0.706790214084557     
-PE =    464      Runoff  exchange size equals one.
-PE =    435      Runoff  exchange size equals one.
-PE =    407      Runoff  exchange size equals one.
-PE =    245      Runoff  exchange size equals one.
- OCN(LNDOCN)=  0.706790214084558       0.706790214084557     
-  0.706790214084558     
-PE =    479      Runoff  exchange size equals one.
-NOTE from PE     0: diag_field_init in flux_exchange_mod: diagnostic field "dynamics", "area" is not in the diag_table
-NOTE from PE     0: grid_mod/get_grid_cell_centers: domain is not present, global data will be read
- BEGIN CHECKSUM(Atmos_data_type):: coupler_init+           0
-CHECKSUM::     atm%lon_bnd                 =     2454438192C42656
-CHECKSUM::     atm%lat_bnd                 =     8A20213FCAE93439
-CHECKSUM::     atm%t_bot                   =      6B0000000000000
-CHECKSUM::     atm%tr_bot(:,:,n)           =                    0
-CHECKSUM::     atm%z_bot                   =     4C00000000000000
-CHECKSUM::     atm%p_bot                   =     3046800000000000
-CHECKSUM::     atm%u_bot                   =                    0
-CHECKSUM::     atm%v_bot                   =                    0
-CHECKSUM::     atm%p_surf                  =     FB6E000000000000
-CHECKSUM::     atm%slp                     =     FB6E000000000000
-CHECKSUM::     atm%gust                    =                    0
-CHECKSUM::     atm%coszen                  =                    0
-CHECKSUM::     atm%flux_sw                 =                    0
-CHECKSUM::     atm%flux_sw_dir             =                    0
-CHECKSUM::     atm%flux_sw_dif             =                    0
-CHECKSUM::     atm%flux_sw_down_vis_dir    =                    0
-CHECKSUM::     atm%flux_sw_down_vis_dif    =                    0
-CHECKSUM::     atm%flux_sw_down_total_dir  =                    0
-CHECKSUM::     atm%flux_sw_down_total_dif  =                    0
-CHECKSUM::     atm%flux_sw_vis             =                    0
-CHECKSUM::     atm%flux_sw_vis_dir         =                    0
-CHECKSUM::     atm%flux_sw_vis_dif         =                    0
-CHECKSUM::     atm%flux_lw                 =                    0
-CHECKSUM::     atm%lprec                   =                    0
-CHECKSUM::     atm%fprec                   =                    0
- BEGIN CHECKSUM(lnd_ice_Atm_bnd_type):: coupler_init+           0
-CHECKSUM::lnd_ice_atm_bnd_type%t           =      6B0000000000000
-CHECKSUM::lnd_ice_atm_bnd_type%albedo      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%albedo_vis_ =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%albedo_nir_ =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%albedo_vis_ =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%albedo_nir_ =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%land_frac   =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dt_t        =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dt_tr(:,:,n =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dt_tr(:,:,n =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dt_tr(:,:,n =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dt_tr(:,:,n =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%u_flux      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%v_flux      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dtaudu      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%dtaudv      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%u_star      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%b_star      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%q_star      =                    0
-CHECKSUM::lnd_ice_atm_bnd_type%rough_mom   =     D00000000002D900
- BEGIN CHECKSUM(ice_data_type):: coupler_init+           0
-   CHECKSUM::ice_data_type%part_size          =     9800000000000000
-   CHECKSUM::ice_data_type%t_surf             =                    0
-   CHECKSUM::ice_data_type%s_surf             =                    0
- BEGIN CHECKSUM(atmos_ice_boundary_type):: coupler_init+           0
-CHECKSUM::atm_ice_bnd_type%u_flux          =                    0
-CHECKSUM::atm_ice_bnd_type%v_flux          =                    0
-CHECKSUM::atm_ice_bnd_type%u_star          =                    0
-CHECKSUM::atm_ice_bnd_type%t_flux          =                    0
-CHECKSUM::atm_ice_bnd_type%q_flux          =                    0
-CHECKSUM::atm_ice_bnd_type%lw_flux         =                    0
-CHECKSUM::atm_ice_bnd_type%sw_flux_vis_dir =                    0
-CHECKSUM::atm_ice_bnd_type%sw_flux_vis_dif =                    0
-CHECKSUM::atm_ice_bnd_type%sw_flux_nir_dir =                    0
-CHECKSUM::atm_ice_bnd_type%sw_flux_nir_dif =                    0
-CHECKSUM::atm_ice_bnd_type%lprec           =                    0
-CHECKSUM::atm_ice_bnd_type%fprec           =                    0
-CHECKSUM::atm_ice_bnd_type%dhdt            =                    0
-CHECKSUM::atm_ice_bnd_type%dedt            =                    0
-CHECKSUM::atm_ice_bnd_type%drdt            =                    0
-CHECKSUM::atm_ice_bnd_type%coszen          =                    0
-CHECKSUM::atm_ice_bnd_type%p               =                    0
- BEGIN CHECKSUM(ocean_ice_boundary_type):: coupler_init+           0
-CHECKSUM::      ocn_ice_bnd_type%u         =                    0
-CHECKSUM::      ocn_ice_bnd_type%v         =                    0
-CHECKSUM::      ocn_ice_bnd_type%t         =     DAE8000000000000
-CHECKSUM::      ocn_ice_bnd_type%s         =                    0
-CHECKSUM::      ocn_ice_bnd_type%frazil    =                    0
-CHECKSUM::      ocn_ice_bnd_type%sea_level =                    0
- BEGIN CHECKSUM(land_data_type):: coupler_init+           0
-CHECKSUM::         land%tile_size          =     7E5FFE4E0E21EA66
-CHECKSUM::         land%t_surf             =     6880000000000000
-CHECKSUM::         land%t_ca               =     6880000000000000
-CHECKSUM::         land%albedo             =                    0
-CHECKSUM::         land%albedo_vis_dir     =                    0
-CHECKSUM::         land%albedo_nir_dir     =                    0
-CHECKSUM::         land%albedo_vis_dif     =                    0
-CHECKSUM::         land%albedo_nir_dif     =                    0
-CHECKSUM::         land%rough_mom          =                    0
-CHECKSUM::         land%rough_heat         =                    0
-CHECKSUM::         land%rough_scale        =     5000000000000000
-CHECKSUM::         land%tr                 =                    0
-CHECKSUM::         land%discharge          =                    0
-CHECKSUM::         land%discharge_snow     =                    0
-CHECKSUM::         land%discharge_heat     =                    0
- BEGIN CHECKSUM(atmos_land_boundary_type):: coupler_init+           0
-CHECKSUM::     albt%t_flux                 =                    0
-CHECKSUM::     albt%lw_flux                =                    0
-CHECKSUM::     albt%lwdn_flux              =                    0
-CHECKSUM::     albt%sw_flux                =                    0
-CHECKSUM::   albt%swdn_flux                =                    0
-CHECKSUM::     albt%lprec                  =                    0
-CHECKSUM::     albt%fprec                  =                    0
-CHECKSUM::     albt%tprec                  =                    0
-CHECKSUM::     albt%sw_flux_down_vis_dir   =                    0
-CHECKSUM::     albt%sw_flux_down_total_dir =                    0
-CHECKSUM::     albt%sw_flux_down_vis_dif   =                    0
-CHECKSUM::     albt%sw_flux_down_total_dif =                    0
-CHECKSUM::     albt%dhdt                   =                    0
-CHECKSUM::     albt%dhdq                   =                    0
-CHECKSUM::     albt%drdt                   =                    0
-CHECKSUM::     albt%cd_m                   =                    0
-CHECKSUM::     albt%cd_t                   =                    0
-CHECKSUM::     albt%ustar                  =                    0
-CHECKSUM::     albt%bstar                  =                    0
-CHECKSUM::     albt%wind                   =                    0
-CHECKSUM::     albt%z_bot                  =                    0
-CHECKSUM::     albt%drag_q                 =                    0
-CHECKSUM::     albt%p_surf                 =     FB6E000000000000
-CHECKSUM::     albt%tr_flux                =                    0
-CHECKSUM::     albt%dfdtr                  =                    0
- BEGIN CHECKSUM(ocean_type):: coupler_init+           0
-   CHECKSUM::     ocean%t_surf    =     3600673354A4B0D4
-   CHECKSUM::     ocean%s_surf    =     DFF2F8B84C9EE10C
-   CHECKSUM::     ocean%u_surf    =                    0
-   CHECKSUM::     ocean%v_surf    =                    0
-   CHECKSUM::     ocean%sea_lev   =     1902F1C80CDFBC16
-   CHECKSUM::     ocean%frazil    =                    0
- BEGIN CHECKSUM(ice_ocean_boundary_type):: coupler_init+           0
-   CHECKSUM::iobt%u_flux          =                    0
-   CHECKSUM::iobt%v_flux          =                    0
-   CHECKSUM::iobt%t_flux          =                    0
-   CHECKSUM::iobt%q_flux          =                    0
-   CHECKSUM::iobt%salt_flux       =                    0
-   CHECKSUM::iobt%lw_flux         =                    0
-   CHECKSUM::iobt%sw_flux_vis_dir =                    0
-   CHECKSUM::iobt%sw_flux_vis_dif =                    0
-   CHECKSUM::iobt%sw_flux_nir_dir =                    0
-   CHECKSUM::iobt%sw_flux_nir_dif =                    0
-   CHECKSUM::iobt%lprec           =                    0
-   CHECKSUM::iobt%fprec           =                    0
-   CHECKSUM::iobt%runoff          =                    0
-   CHECKSUM::iobt%calving         =                    0
-   CHECKSUM::iobt%p               =                    0
-diamonds, accumulate_calving: initial stored mass= 1.516515E+18 kg
-diamonds, accumulate_calving: initial stored heat= 0.000000E+00 J
-
-WARNING from PE     0: MPP_OPEN: File ./ocean.stats opened WRONLY already exists!
-
-MOM Date   1985/01/01 00:00:00      0: En 3.047909E-01, MaxCFL  0.00000, Mass 1.381843103592E+21, Salt  34.72021236295, Temp   3.60422931390
-    Total Energy: 4436D4F409CAEA47  4.2117327021908682E+20
-    Total Mass:   1.3818431035924215E+21, Change:   0.0000000000000000E+00 Error:  0.00000E+00 ( 0.0E+00)
-    Total Salt:   4.7977886009006842E+19, Change:   0.0000000000000000E+00 Error:  0.00000E+00 ( 0.0E+00)
-    Total Heat:   1.9882073849366497E+25, Change:   0.0000000000000000E+00 Error:  0.00000E+00 ( 0.0E+00)
-      Total age:   0.0000000000000000E+00 years kg
-SIS Date   1985/01/01 06:00:00     12: Area 9.238584490795E+12 8.989165395499E+10, Mass  6.55128634510E+14 6.22137653959E+12
- Total Ice Mass:   6.6135001105001788E+14, Change:  6.61350E+14 Error:  2.11476E-03 ( 3.2E-18)
- Total Ice Salt:   2.0342534305071471E+09, Change:  2.03425E+09 Error:  1.92590E-07 ( 9.5E-17)
- Total Ice Heat:  -2.1726383870039795E+20, Change: -2.17264E+20 Error: -5.06404E+04 ( 2.3E-16)
-MOM Date   1985/01/01 06:00:00     12: En 3.066659E-01, MaxCFL  0.10188, Mass 1.381843510443E+21, Salt  34.72020066829, Temp   3.60427719380
-    Total Energy: 4436F8E8F29FE6C6  4.2376422190619859E+20
-    Total Mass:   1.3818435104431074E+21, Change:   4.0685068610131781E+14 Error: -1.11463E+02 (-8.1E-20)
-    Total Salt:   4.7977883974753411E+19, Change:  -2.0342534304646902E+12 Error:  4.24563E+01 ( 8.8E-19)
-    Total Heat:   1.9882343823957155E+25, Change:   2.6997459066114245E+20 Error:  1.17441E+07 ( 5.9E-19)
-      Total age:   9.4525586643362816E+17 years kg
-SIS Date   1985/01/01 12:00:00     24: Area 9.702262817326E+12 8.791717229324E+10, Mass  7.86867857868E+14 6.04927264690E+12
- Total Ice Mass:   7.9291713051507625E+14, Change:  1.31567E+14 Error:  2.95166E-03 ( 3.7E-18)
- Total Ice Salt:   2.4275873788127093E+09, Change:  3.93334E+08 Error:  5.00614E-08 ( 2.1E-17)
- Total Ice Heat:  -2.6589597898667160E+20, Change: -4.86321E+19 Error: -6.87126E+04 ( 2.6E-16)
-MOM Date   1985/01/01 12:00:00     24: En 3.066885E-01, MaxCFL  0.12881, Mass 1.381843589110E+21, Salt  34.72019840706, Temp   3.60425029509
-    Total Energy: 4436F958288269D7  4.2379552487559129E+20
-    Total Mass:   1.3818435891098962E+21, Change:   7.8666789661011234E+13 Error: -1.01242E+02 (-7.3E-20)
-    Total Salt:   4.7977883581419471E+19, Change:  -3.9333394834978870E+11 Error: -4.42263E+01 (-9.2E-19)
-    Total Heat:   1.9882196573951091E+25, Change:  -1.4725000606464677E+20 Error:  4.16570E+06 ( 2.1E-19)
-      Total age:   1.8891566567131955E+18 years kg
-SIS Date   1985/01/01 18:00:00     36: Area 9.958713363202E+12 8.177663890421E+10, Mass  9.17636103436E+14 5.66182136545E+12
- Total Ice Mass:   9.2329792480103725E+14, Change:  1.30381E+14 Error:  6.48868E-03 ( 7.0E-18)
- Total Ice Salt:   2.8186600788364635E+09, Change:  3.91073E+08 Error:  5.92233E-08 ( 2.1E-17)
- Total Ice Heat:  -3.1227816753717517E+20, Change: -4.63822E+19 Error: -8.07971E+04 ( 2.6E-16)
-MOM Date   1985/01/01 18:00:00     36: En 3.067077E-01, MaxCFL  0.10855, Mass 1.381843667324E+21, Salt  34.72019615883, Temp   3.60424438734
-    Total Energy: 4436F9B674D15518  4.2382206742524015E+20
-    Total Mass:   1.3818436673244370E+21, Change:   7.8214540004753328E+13 Error:  2.56604E+00 ( 1.9E-21)
-    Total Salt:   4.7977883190346768E+19, Change:  -3.9107270000742267E+11 Error:  1.63311E+01 ( 3.4E-19)
-    Total Heat:   1.9882165110301852E+25, Change:  -3.1463649242070422E+19 Error: -4.47774E+06 (-2.3E-19)
-      Total age:   2.8320170986990331E+18 years kg
-diamonds:   stored ice state:             start= 1.5165146E+18 kg,               end= 1.5165146E+18 kg,             Delta= 0.0000000E+00 kg
-diamonds:     floating state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,            Delta = 0.0000000E+00 kg,  # of bergs       0
-diamonds:     icebergs state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds:         bits state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 m^,               end= 0.0000000E+00 m^,             Delta= 0.0000000E+00 m^
-diamonds:       berg # state:             start=             0 ,               end=             0 ,             Delta=             0
-diamonds:      berg # budget:         calved in=             0 ,        melted out=             0 ,           Delta #=             0 ,             error=             0
-diamonds: stored mass budget:   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: floating mass budge   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   berg mass budget:        calving in= 0.0000000E+00 kg,     melt+eros out= 0.0000000E+00 kg,   Delta berg mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   bits mass budget:      eros used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:    net mass budget:          recvd in= 0.0000000E+00 kg,         rtrnd out= 0.0000000E+00 kg,    Delta net mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: iceberg mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread area check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:    bits mass check:           gridded= 0.0000000E+00 kg,              bits= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:       wieght check:          returned= 0.0000000E+00 kg,          floating= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:     net heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:  stored heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds: floating heat state             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:    net heat budget:       net heat in= 0.0000000E+00  J,      net heat out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: stored heat budget:   calving used in= 0.0000000E+00  J,         bergs out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: flting heat budget:         calved in= 0.0000000E+00  J,          melt out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: calved by class =    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-SIS Date   1985/01/02 00:00:00     48: Area 1.014787951692E+13 7.116034337550E+10, Mass  1.04416305040E+15 5.01344676608E+12
- Total Ice Mass:   1.0491764971680906E+15, Change:  1.25879E+14 Error:  7.54793E-03 ( 7.2E-18)
- Total Ice Salt:   3.1971613189608092E+09, Change:  3.78501E+08 Error:  5.95046E-08 ( 1.9E-17)
- Total Ice Heat:  -3.5644420284349225E+20, Change: -4.41660E+19 Error: -1.22707E+05 ( 3.4E-16)
-MOM Date   1985/01/02 00:00:00     48: En 3.067388E-01, MaxCFL  0.12339, Mass 1.381843743025E+21, Salt  34.72019398288, Temp   3.60428114213
-    Total Energy: 4436FA4F42271EEF  4.2386507739004240E+20
-    Total Mass:   1.3818437430246850E+21, Change:   7.5700248024933141E+13 Error:  6.39056E+01 ( 4.6E-20)
-    Total Salt:   4.7977882811845526E+19, Change:  -3.7850124015918427E+11 Error: -3.48381E+01 (-7.3E-19)
-    Total Heat:   1.9882368950660209E+25, Change:   2.0384035835865330E+20 Error:  3.03471E+07 ( 1.5E-18)
-      Total age:   3.7740787852319375E+18 years kg
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ice_model/U_STAR) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ice_model/V_STAR) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/rho) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/eta_t) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/eta_u) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/tau_x) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/tau_y) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/ke_tot) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pe_tot) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/horz_diverge_t) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/horz_diverge_u) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/vorticity_z) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/ekman_we) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/ekman_heat) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/tau_curl) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/sens_heat) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/evap_heat) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/lw_heat) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/swflx) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/swflx_vis) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/river) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/sfc_hflux) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/psiu) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/psiv) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/hblt) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/mld) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/cdbot) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/bmf_u) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/bmf_v) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/agm) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/wt) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/courant_wbt) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/press) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho_0) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho_1) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho_2) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho_3) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/pot_rho_4) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/dzt) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/dzu) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/dzwt) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/dzwu) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/diff_cbt_wave) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/diff_cbt_dtag) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/diff_cbt_kpp_t) NOT registered
-
-
-WARNING from PE     0: diag_util_mod::opening_file: module/field_name (ocean_model/visc_cbu) NOT registered
-
-NOTE from PE     0: MPP_IO_SET_STACK_SIZE: stack size set to   29160000.
-SIS Date   1985/01/02 06:00:00     60: Area 1.031427694326E+13 6.513930417375E+10, Mass  1.16507634480E+15 4.44689118487E+12
- Total Ice Mass:   1.1695232359844550E+15, Change:  1.20347E+14 Error:  9.46499E-03 ( 8.1E-18)
- Total Ice Salt:   3.5595165697112937E+09, Change:  3.62355E+08 Error:  6.63671E-08 ( 1.9E-17)
- Total Ice Heat:  -3.9819014122391038E+20, Change: -4.17459E+19 Error: -1.05719E+05 ( 2.7E-16)
-MOM Date   1985/01/02 06:00:00     60: En 3.067238E-01, MaxCFL  0.15649, Mass 1.381843815496E+21, Salt  34.72019189975, Temp   3.60429863813
-    Total Energy: 4436FA05FD041434  4.2384445369993632E+20
-    Total Mass:   1.3818438154957354E+21, Change:   7.2471050150206109E+13 Error:  1.09265E+02 ( 7.9E-20)
-    Total Salt:   4.7977882449490272E+19, Change:  -3.6235525073128632E+11 Error:  1.91979E+01 ( 4.0E-19)
-    Total Heat:   1.9882466506946927E+25, Change:   9.7556286720317702E+19 Error: -2.72888E+07 (-1.4E-18)
-      Total age:   4.7155706653768817E+18 years kg
-SIS Date   1985/01/02 12:00:00     72: Area 1.043807218559E+13 6.197840071845E+10, Mass  1.28231979813E+15 4.06706590525E+12
- Total Ice Mass:   1.2863868640338258E+15, Change:  1.16864E+14 Error:  9.73024E-03 ( 7.6E-18)
- Total Ice Salt:   3.9114103189955258E+09, Change:  3.51894E+08 Error:  4.17270E-08 ( 1.1E-17)
- Total Ice Heat:  -4.3912235580593091E+20, Change: -4.09322E+19 Error: -9.81187E+04 ( 2.2E-16)
-MOM Date   1985/01/02 12:00:00     72: En 3.067355E-01, MaxCFL  0.11565, Mass 1.381843885874E+21, Salt  34.72018987676, Temp   3.60428537182
-    Total Energy: 4436FA3F7CA899C3  4.2386063811820093E+20
-    Total Mass:   1.3818438858744857E+21, Change:   7.0378749856770812E+13 Error: -7.56287E+01 (-5.5E-20)
-    Total Salt:   4.7977882097596522E+19, Change:  -3.5189374929804102E+11 Error: -1.38088E+01 (-2.9E-19)
-    Total Heat:   1.9882394338340655E+25, Change:  -7.2168606272241410E+19 Error: -2.07908E+07 (-1.0E-18)
-      Total age:   5.6564870116341309E+18 years kg
-SIS Date   1985/01/02 18:00:00     84: Area 1.054977741010E+13 5.695347962837E+10, Mass  1.39815449114E+15 3.67202235417E+12
- Total Ice Mass:   1.4018265134938745E+15, Change:  1.15440E+14 Error:  1.70300E-02 ( 1.2E-17)
- Total Ice Salt:   4.2593854764185114E+09, Change:  3.47975E+08 Error:  8.03917E-08 ( 1.9E-17)
- Total Ice Heat:  -4.8002926872005706E+20, Change: -4.09069E+19 Error: -1.08128E+05 ( 2.3E-16)
-MOM Date   1985/01/02 18:00:00     84: En 3.067216E-01, MaxCFL  0.15407, Mass 1.381843955470E+21, Salt  34.72018787629, Temp   3.60428719918
-    Total Energy: 4436F9FB4B15327E  4.2384144331062208E+20
-    Total Mass:   1.3818439554695168E+21, Change:   6.9595031484575719E+13 Error: -2.12677E+01 (-1.5E-20)
-    Total Salt:   4.7977881749621367E+19, Change:  -3.4797515742032605E+11 Error:  2.65889E+00 ( 5.5E-20)
-    Total Heat:   1.9882405419987282E+25, Change:   1.1081646625883441E+19 Error:  3.96924E+05 ( 2.0E-20)
-      Total age:   6.5968260137032694E+18 years kg
-diamonds:   stored ice state:             start= 1.5165146E+18 kg,               end= 1.5165146E+18 kg,             Delta= 0.0000000E+00 kg
-diamonds:     floating state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,            Delta = 0.0000000E+00 kg,  # of bergs       0
-diamonds:     icebergs state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds:         bits state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 m^,               end= 0.0000000E+00 m^,             Delta= 0.0000000E+00 m^
-diamonds:       berg # state:             start=             0 ,               end=             0 ,             Delta=             0
-diamonds:      berg # budget:         calved in=             0 ,        melted out=             0 ,           Delta #=             0 ,             error=             0
-diamonds: stored mass budget:   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: floating mass budge   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   berg mass budget:        calving in= 0.0000000E+00 kg,     melt+eros out= 0.0000000E+00 kg,   Delta berg mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   bits mass budget:      eros used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:    net mass budget:          recvd in= 0.0000000E+00 kg,         rtrnd out= 0.0000000E+00 kg,    Delta net mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: iceberg mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread area check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:    bits mass check:           gridded= 0.0000000E+00 kg,              bits= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:       wieght check:          returned= 0.0000000E+00 kg,          floating= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:     net heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:  stored heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds: floating heat state             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:    net heat budget:       net heat in= 0.0000000E+00  J,      net heat out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: stored heat budget:   calving used in= 0.0000000E+00  J,         bergs out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: flting heat budget:         calved in= 0.0000000E+00  J,          melt out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: calved by class =    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-SIS Date   1985/01/03 00:00:00     96: Area 1.065376400226E+13 5.097109483910E+10, Mass  1.51251572452E+15 3.12066064223E+12
- Total Ice Mass:   1.5156363851648220E+15, Change:  1.13810E+14 Error:  1.55184E-02 ( 1.0E-17)
- Total Ice Salt:   4.6029976344053364E+09, Change:  3.43612E+08 Error:  7.64610E-08 ( 1.7E-17)
- Total Ice Heat:  -5.2054960657264896E+20, Change: -4.05203E+19 Error: -9.90168E+04 ( 1.9E-16)
-MOM Date   1985/01/03 00:00:00     96: En 3.067125E-01, MaxCFL  0.13066, Mass 1.381844024192E+21, Salt  34.72018590091, Temp   3.60433211743
-    Total Energy: 4436F9CE54F7725D  4.2382878780400894E+20
-    Total Mass:   1.3818440241919482E+21, Change:   6.8722431597443148E+13 Error:  7.82061E+01 ( 5.7E-20)
-    Total Salt:   4.7977881406009213E+19, Change:  -3.4361215803602283E+11 Error: -4.91981E+01 (-1.0E-18)
-    Total Heat:   1.9882654192336385E+25, Change:   2.4877234910438323E+20 Error:  1.24707E+07 ( 6.3E-19)
-      Total age:   7.5367239910585528E+18 years kg
-SIS Date   1985/01/03 06:00:00    108: Area 1.074969063149E+13 4.695855077266E+10, Mass  1.62429164471E+15 2.60205656349E+12
- Total Ice Mass:   1.6268937012763230E+15, Change:  1.11257E+14 Error:  7.23400E-03 ( 4.4E-18)
- Total Ice Salt:   4.9391435272947836E+09, Change:  3.36146E+08 Error:  6.12141E-08 ( 1.2E-17)
- Total Ice Heat:  -5.5994685077986030E+20, Change: -3.93972E+19 Error: -8.48850E+04 ( 1.5E-16)
-MOM Date   1985/01/03 06:00:00    108: En 3.066989E-01, MaxCFL  0.20769, Mass 1.381844091421E+21, Salt  34.72018396845, Temp   3.60435775196
-    Total Energy: 4436F98BF92C5AAC  4.2381010952771207E+20
-    Total Mass:   1.3818440914211263E+21, Change:   6.7229178577743047E+13 Error: -1.46557E+02 (-1.1E-19)
-    Total Salt:   4.7977881069863322E+19, Change:  -3.3614589287625201E+11 Error:  1.31960E+01 ( 2.8E-19)
-    Total Heat:   1.9882796567961126E+25, Change:   1.4237562473951006E+20 Error: -2.44582E+07 (-1.2E-18)
-      Total age:   8.4763569510630144E+18 years kg
-SIS Date   1985/01/03 12:00:00    120: Area 1.086419832621E+13 4.432177161252E+10, Mass  1.73371588138E+15 2.28230400435E+12
- Total Ice Mass:   1.7359981853851558E+15, Change:  1.09104E+14 Error:  1.15694E-02 ( 6.7E-18)
- Total Ice Salt:   5.2691250653467035E+09, Change:  3.29982E+08 Error:  6.71852E-08 ( 1.3E-17)
- Total Ice Heat:  -5.9857559772807273E+20, Change: -3.86287E+19 Error: -8.64513E+04 ( 1.4E-16)
-MOM Date   1985/01/03 12:00:00    120: En 3.066884E-01, MaxCFL  0.12394, Mass 1.381844157417E+21, Salt  34.72018207143, Temp   3.60434890743
-    Total Energy: 4436F9589232AAEF  4.2379564108131854E+20
-    Total Mass:   1.3818441574174339E+21, Change:   6.5996307610170234E+13 Error: -2.13670E+02 (-1.5E-19)
-    Total Salt:   4.7977880739881779E+19, Change:  -3.2998153809827148E+11 Error: -4.63519E+01 (-9.7E-19)
-    Total Heat:   1.9882748728262115E+25, Change:  -4.7839699012447617E+19 Error:  1.11785E+07 ( 5.6E-19)
-      Total age:   9.4156020810739651E+18 years kg
-SIS Date   1985/01/03 18:00:00    132: Area 1.096532090659E+13 4.111352987786E+10, Mass  1.83903433437E+15 1.98187436133E+12
- Total Ice Mass:   1.8410162087313558E+15, Change:  1.05018E+14 Error:  6.32709E-03 ( 3.4E-18)
- Total Ice Salt:   5.5869242224825535E+09, Change:  3.17799E+08 Error:  5.83340E-08 ( 1.0E-17)
- Total Ice Heat:  -6.3512504616590154E+20, Change: -3.65494E+19 Error: -8.73280E+04 ( 1.4E-16)
-MOM Date   1985/01/03 18:00:00    132: En 3.066791E-01, MaxCFL  0.12776, Mass 1.381844220977E+21, Salt  34.72018024445, Temp   3.60435135401
-    Total Energy: 4436F92AAE664E7C  4.2378272424050269E+20
-    Total Mass:   1.3818442209772658E+21, Change:   6.3559831427131555E+13 Error: -3.85140E+01 (-2.8E-20)
-    Total Salt:   4.7977880422082617E+19, Change:  -3.1779915714779340E+11 Error: -1.19431E+01 (-2.5E-19)
-    Total Heat:   1.9882763138923535E+25, Change:   1.4410661422581518E+19 Error:  1.62196E+07 ( 8.2E-19)
-      Total age:   1.0354283938450764E+19 years kg
-diamonds:   stored ice state:             start= 1.5165146E+18 kg,               end= 1.5165146E+18 kg,             Delta= 0.0000000E+00 kg
-diamonds:     floating state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,            Delta = 0.0000000E+00 kg,  # of bergs       0
-diamonds:     icebergs state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds:         bits state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 m^,               end= 0.0000000E+00 m^,             Delta= 0.0000000E+00 m^
-diamonds:       berg # state:             start=             0 ,               end=             0 ,             Delta=             0
-diamonds:      berg # budget:         calved in=             0 ,        melted out=             0 ,           Delta #=             0 ,             error=             0
-diamonds: stored mass budget:   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: floating mass budge   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   berg mass budget:        calving in= 0.0000000E+00 kg,     melt+eros out= 0.0000000E+00 kg,   Delta berg mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   bits mass budget:      eros used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:    net mass budget:          recvd in= 0.0000000E+00 kg,         rtrnd out= 0.0000000E+00 kg,    Delta net mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: iceberg mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread area check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:    bits mass check:           gridded= 0.0000000E+00 kg,              bits= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:       wieght check:          returned= 0.0000000E+00 kg,          floating= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:     net heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:  stored heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds: floating heat state             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:    net heat budget:       net heat in= 0.0000000E+00  J,      net heat out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: stored heat budget:   calving used in= 0.0000000E+00  J,         bergs out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: flting heat budget:         calved in= 0.0000000E+00  J,          melt out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: calved by class =    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-SIS Date   1985/01/04 00:00:00    144: Area 1.105529520332E+13 3.619319753635E+10, Mass  1.94041246461E+15 1.55475688377E+12
- Total Ice Mass:   1.9419672214985228E+15, Change:  1.00951E+14 Error:  1.60457E-02 ( 8.3E-18)
- Total Ice Salt:   5.8924210982457142E+09, Change:  3.05497E+08 Error:  6.39125E-08 ( 1.1E-17)
- Total Ice Heat:  -6.7050895289909300E+20, Change: -3.53839E+19 Error: -9.86453E+04 ( 1.5E-16)
-MOM Date   1985/01/04 00:00:00    144: En 3.066669E-01, MaxCFL  0.12057, Mass 1.381844282077E+21, Salt  34.72017848819, Temp   3.60439696915
-    Total Energy: 4436F8EF225FA36C  4.2376596325660911E+20
-    Total Mass:   1.3818442820766411E+21, Change:   6.1099375152559945E+13 Error: -7.19645E+01 (-5.2E-20)
-    Total Salt:   4.7977880116585751E+19, Change:  -3.0549687571330127E+11 Error:  4.98583E+01 ( 1.0E-18)
-    Total Heat:   1.9883015645865883E+25, Change:   2.5250694234845358E+20 Error: -2.38274E+07 (-1.2E-18)
-      Total age:   1.1292590110149028E+19 years kg
-SIS Date   1985/01/04 06:00:00    156: Area 1.118092792792E+13 3.131071622885E+10, Mass  2.04032841528E+15 1.17555659223E+12
- Total Ice Mass:   2.0415039718694098E+15, Change:  9.95368E+13 Error:  1.31807E-02 ( 6.5E-18)
- Total Ice Salt:   6.1931073879912701E+09, Change:  3.00686E+08 Error:  7.68436E-08 ( 1.2E-17)
- Total Ice Heat:  -7.0535164283051259E+20, Change: -3.48427E+19 Error: -1.12513E+05 ( 1.6E-16)
-MOM Date   1985/01/04 06:00:00    156: En 3.066526E-01, MaxCFL  0.09296, Mass 1.381844342214E+21, Salt  34.72017675959, Temp   3.60442032775
-    Total Energy: 4436F8A8EE7E1C11  4.2374620296450782E+20
-    Total Mass:   1.3818443422138984E+21, Change:   6.0137257949020492E+13 Error: -9.08172E+01 (-6.6E-20)
-    Total Salt:   4.7977879815899464E+19, Change:  -3.0068628977129919E+11 Error: -2.57426E+01 (-5.4E-19)
-    Total Heat:   1.9883145364742063E+25, Change:   1.2971887617787771E+20 Error:  1.02295E+07 ( 5.1E-19)
-      Total age:   1.2230764260283863E+19 years kg
-SIS Date   1985/01/04 12:00:00    168: Area 1.131076253580E+13 2.830141128507E+10, Mass  2.13962873666E+15 9.77367821251E+11
- Total Ice Mass:   2.1406061044820390E+15, Change:  9.91021E+13 Error:  2.11435E-02 ( 9.9E-18)
- Total Ice Salt:   6.4921315504127779E+09, Change:  2.99024E+08 Error:  8.52954E-08 ( 1.3E-17)
- Total Ice Heat:  -7.4013390111626979E+20, Change: -3.47823E+19 Error: -1.22334E+05 ( 1.7E-16)
-MOM Date   1985/01/04 12:00:00    168: En 3.066480E-01, MaxCFL  0.10083, Mass 1.381844402019E+21, Salt  34.72017504054, Temp   3.60440324892
-    Total Energy: 4436F89261C16AEF  4.2373985577296665E+20
-    Total Mass:   1.3818444020187317E+21, Change:   5.9804832484497656E+13 Error:  1.96226E+02 ( 1.4E-19)
-    Total Salt:   4.7977879516875301E+19, Change:  -2.9902416233743829E+11 Error:  8.40688E+01 ( 1.8E-18)
-    Total Heat:   1.9883052012909590E+25, Change:  -9.3351832472203657E+19 Error: -1.40443E+07 (-7.1E-19)
-      Total age:   1.3168672942073815E+19 years kg
-SIS Date   1985/01/04 18:00:00    180: Area 1.142511380827E+13 2.410949039874E+10, Mass  2.23708791189E+15 8.09524580377E+11
- Total Ice Mass:   2.2378974364714090E+15, Change:  9.72913E+13 Error:  2.09471E-02 ( 9.4E-18)
- Total Ice Salt:   6.7853351940271206E+09, Change:  2.93204E+08 Error:  8.04039E-08 ( 1.2E-17)
- Total Ice Heat:  -7.7401814145026202E+20, Change: -3.38842E+19 Error: -1.30425E+05 ( 1.7E-16)
-MOM Date   1985/01/04 18:00:00    180: En 3.066501E-01, MaxCFL  0.11582, Mass 1.381844460659E+21, Salt  34.72017335495, Temp   3.60439968123
-    Total Energy: 4436F89CA9E1074F  4.2374274982333848E+20
-    Total Mass:   1.3818444606594605E+21, Change:   5.8640728722663922E+13 Error: -2.04570E+02 (-1.5E-19)
-    Total Salt:   4.7977879223671652E+19, Change:  -2.9320364365300378E+11 Error: -3.86613E+01 (-8.1E-19)
-    Total Heat:   1.9883033176153452E+25, Change:  -1.8836756139744256E+19 Error:  2.06535E+07 ( 1.0E-18)
-      Total age:   1.4106080279300016E+19 years kg
-diamonds:   stored ice state:             start= 1.5165146E+18 kg,               end= 1.5165146E+18 kg,             Delta= 0.0000000E+00 kg
-diamonds:     floating state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,            Delta = 0.0000000E+00 kg,  # of bergs       0
-diamonds:     icebergs state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds:         bits state:             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 kg,               end= 0.0000000E+00 kg,             Delta= 0.0000000E+00 kg
-diamonds: spread icebergs sta             start= 0.0000000E+00 m^,               end= 0.0000000E+00 m^,             Delta= 0.0000000E+00 m^
-diamonds:       berg # state:             start=             0 ,               end=             0 ,             Delta=             0
-diamonds:      berg # budget:         calved in=             0 ,        melted out=             0 ,           Delta #=             0 ,             error=             0
-diamonds: stored mass budget:   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: floating mass budge   calving used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   berg mass budget:        calving in= 0.0000000E+00 kg,     melt+eros out= 0.0000000E+00 kg,   Delta berg mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:   bits mass budget:      eros used in= 0.0000000E+00 kg,         bergs out= 0.0000000E+00 kg, Delta stored mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds:    net mass budget:          recvd in= 0.0000000E+00 kg,         rtrnd out= 0.0000000E+00 kg,    Delta net mass= 0.0000000E+00 kg,   error= 0.000E+00 nd
-diamonds: iceberg mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread mass check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:  spread area check:           gridded= 0.0000000E+00 kg,             bergs= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:    bits mass check:           gridded= 0.0000000E+00 kg,              bits= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:       wieght check:          returned= 0.0000000E+00 kg,          floating= 0.0000000E+00 kg,             error= 0.0000000E+00 nd
-diamonds:     net heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:  stored heat state:             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds: floating heat state             start= 0.0000000E+00  J,               end= 0.0000000E+00  J,             Delta= 0.0000000E+00  J
-diamonds:    net heat budget:       net heat in= 0.0000000E+00  J,      net heat out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: stored heat budget:   calving used in= 0.0000000E+00  J,         bergs out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: flting heat budget:         calved in= 0.0000000E+00  J,          melt out= 0.0000000E+00  J,    Delta net heat= 0.0000000E+00  J,   error= 0.000E+00 nd
-diamonds: calved by class =    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
-SIS Date   1985/01/05 00:00:00    192: Area 1.153385685010E+13 1.628364326574E+10, Mass  2.33256952551E+15 6.04887301294E+11
- Total Ice Mass:   2.3331744128103905E+15, Change:  9.52770E+13 Error:  3.43117E-02 ( 1.5E-17)
- Total Ice Salt:   7.0727769945531321E+09, Change:  2.87442E+08 Error:  1.30489E-07 ( 1.8E-17)
- Total Ice Heat:  -8.0801108284599724E+20, Change: -3.39929E+19 Error: -1.36160E+05 ( 1.7E-16)
-MOM Date   1985/01/05 00:00:00    192: En 3.066397E-01, MaxCFL  0.13025, Mass 1.381844518148E+21, Salt  34.72017170248, Temp   3.60444320007
-    Total Energy: 4436F869C50A371B  4.2372842446323574E+20
-    Total Mass:   1.3818445181478196E+21, Change:   5.7488360105268445E+13 Error:  6.61218E+01 ( 4.8E-20)
-    Total Salt:   4.7977878936229855E+19, Change:  -2.8744180048957471E+11 Error:  3.64370E+01 ( 7.6E-19)
-    Total Heat:   1.9883274067341836E+25, Change:   2.4089118838695490E+20 Error: -1.87842E+07 (-9.4E-19)
-      Total age:   1.5043171612421054E+19 years kg
+ lon,lat=  -51.6909600575962       -81.3180649216067     
+ lon,lat=  -63.0523307999418       -81.4333969562545     
+ lon_shape=        1440        1081
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ npts=           0
+ is,ie=     32069712    93912032
+ is,ie=     32069712    92856048
+ js,je=        28800    46800352
+ js,je=        28800    46800352
+ lon,lat=  -143.012234700924       -81.3751286134197     
+ lon,lat=  -29.0976897883472       -81.0200059691259     
+ lon_shape=        1440        1081
+ lon,lat=  -40.3726014551481       -81.1787082238450     
+ lon_shape=        1440        1081
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ lon,lat=  -120.217321572539       -81.5513947838162     
+ npts=           0
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ lat_shape=        1440        1081
+ is,ie=     32069712    93863424
+ npts=           0
+ lat_shape=        1440        1081
+ js,je=        28800    46800352
+ npts=           0
+ is,ie=     32069712    93860736
+ is,ie=     32069712    93912272
+ npts=           0
+ js,je=        28800    46800352
+ is,ie=     32069712    93866736
+ js,je=        28800    46800352
+ js,je=        28800    46800352
+ lon,lat=  -154.350975049271       -81.2464531766072     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    93910096
+ js,je=        28800    46800352
+ lon,lat=  -176.898876704325       -80.9293163322247     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    93910000
+ js,je=        28800    46800352
+ lon,lat=  -108.778230221664       -81.5932588321213     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    93863344
+ js,je=        28800    46800352
+ lon,lat=  -165.645955882946       -81.0961435511308     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    93909968
+ js,je=        28800    46800352
+ lon,lat=  -188.114873818051       -80.7518287961975     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    93895568
+ js,je=        28800    46800352
+ lon,lat=  -199.301484355952       -80.5701490613159     
+ lon_shape=        1440        1081
+ lat_shape=        1440        1081
+ npts=           0
+ is,ie=     32069712    95787344
+ js,je=        28800    46800352
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+MOM6               0000000001C18B01  Unknown               Unknown  Unknown
+MOM6               0000000001C17257  Unknown               Unknown  Unknown
+MOM6               0000000001BCF894  Unknown               Unknown  Unknown
+MOM6               0000000001BCF6A6  Unknown               Unknown  Unknown
+MOM6               0000000001B6734F  Unknown               Unknown  Unknown
+MOM6               0000000001B6AFAD  Unknown               Unknown  Unknown
+MOM6               0000000001652610  Unknown               Unknown  Unknown
+MOM6               00000000014998E2  horiz_interp_bili         681  horiz_interp_bilinear.F90
+MOM6               0000000001497309  horiz_interp_bili         326  horiz_interp_bilinear.F90
+MOM6               0000000001475C40  horiz_interp_mod_         618  horiz_interp.F90
+MOM6               000000000063E1E8  mom_tracer_initia         666  MOM_tracer_initialization_from_Z.F90
+MOM6               000000000066AB99  mom_state_initial        1760  MOM_state_initialization.F90
+MOM6               00000000006BC051  mom_state_initial         207  MOM_state_initialization.F90
+MOM6               0000000000D70691  mom_mp_initialize        2236  MOM.F90
+MOM6               00000000006F80B2  ocean_model_mod_m         242  ocean_model_MOM.F90
+MOM6               0000000000831157  coupler_main_IP_c        1590  coupler_main.F90
+MOM6               0000000000829D76  MAIN__                    530  coupler_main.F90
+MOM6               0000000000400F5E  Unknown               Unknown  Unknown
+MOM6               0000000001C2FC31  Unknown               Unknown  Unknown
+MOM6               0000000000400E39  Unknown               Unknown  Unknown
+[NID 00306] 2017-03-10 03:47:54 Apid 42123747: initiated application termination
+Application 42123747 exit codes: 174
+Application 42123747 exit signals: Killed
+Application 42123747 resources: utime ~16s, stime ~154s, Rss ~243156, inblocks ~1537849, outblocks ~1853680
