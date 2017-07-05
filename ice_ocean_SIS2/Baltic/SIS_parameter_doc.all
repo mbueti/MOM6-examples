@@ -65,6 +65,10 @@ ICE_BOUNDS_CHECK = True         !   [Boolean] default = True
                                 ! does not change answers, but can increase model run time.
 DEBUG = False                   !   [Boolean] default = False
                                 ! If true, write out verbose debugging data.
+DEBUG_SLOW_ICE = False          !   [Boolean] default = False
+                                ! If true, write out verbose debugging data on the slow ice PEs.
+DEBUG_FAST_ICE = False          !   [Boolean] default = False
+                                ! If true, write out verbose debugging data on the fast ice PEs.
 FIRST_DIRECTION = 0             ! default = 0
                                 ! An integer that indicates which direction goes first
                                 ! in parts of the code that use directionally split
@@ -80,12 +84,6 @@ APPLY_SLP_TO_OCEAN = False      !   [Boolean] default = False
 MIN_H_FOR_TEMP_CALC = 0.0       !   [m] default = 0.0
                                 ! The minimum ice thickness at which to do temperature
                                 ! calculations.
-MIN_OCEAN_PARTSIZE = 0.0        !   [nondim] default = 0.0
-                                ! The minimum value for the fractional open-ocean area.
-                                ! This can be 0, but for some purposes it may be useful
-                                ! to set this to a miniscule value (like 1e-40) that will
-                                ! be lost to roundoff during any sums so that the open
-                                ! ocean fluxes can be used in with new categories.
 DO_ICEBERGS = False             !   [Boolean] default = False
                                 ! If true, call the iceberg module.
 ADD_DIURNAL_SW = True           !   [Boolean] default = False
@@ -109,6 +107,10 @@ WRITE_GEOM = 1                  ! default = 1
 INTERPOLATE_FLUXES = True       !   [Boolean] default = True
                                 ! If true, interpolate a linearized version of the fast
                                 ! fluxes into arealess categories.
+REDO_FAST_ICE_UPDATE = False    !   [Boolean] default = False
+                                ! If true, recalculate the thermal updates from the fast
+                                ! dynamics on the slowly evolving ice state, rather than
+                                ! copying over the slow ice state to the fast ice state.
 DEBUG_CHKSUMS = False           !   [Boolean] default = False
                                 ! If true, checksums are performed on arrays in the
                                 ! various vec_chksum routines.
@@ -124,6 +126,12 @@ NK_SNOW = 1                     !   [nondim] default = 1
 H_TO_KG_M2 = 1.0                !   [kg m-2 H-1] default = 1.0
                                 ! A constant that translates thicknesses from the model's
                                 ! internal units of thickness to kg m-2.
+MIN_OCEAN_PARTSIZE = 0.0        !   [nondim] default = 0.0
+                                ! The minimum value for the fractional open-ocean area.
+                                ! This can be 0, but for some purposes it may be useful
+                                ! to set this to a miniscule value (like 1e-40) that will
+                                ! be lost to roundoff during any sums so that the open
+                                ! ocean fluxes can be used in with new categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -248,6 +256,10 @@ ENTHALPY_UNITS = 1.0            !   [J kg-1] default = 1.0
                                 ! different scale in its internal representation.  Changing
                                 ! this by a power of 2 is useful for debugging, as answers
                                 ! should not change.  A negative values is taken as an inverse.
+SUBLIMATION_BUG = False         !   [Boolean] default = False
+                                ! If true use an older calculation that omits the latent
+                                ! heat of fusion from the latent heat of sublimation.
+                                ! This variable should be obsoleted as soon as possible.
 
 ! === module SIS_tracer_registry ===
 
@@ -396,6 +408,9 @@ CFL_TRUNC_DYN_ITS = False       !   [Boolean] default = False
                                 ! If true, check the CFL number for every iteration of the
                                 ! rheology solver; otherwise only the final velocities that
                                 ! are used for transport are checked.
+DEBUG_EVP_SUBSTEPS = False      !   [Boolean] default = False
+                                ! If true, write out verbose debugging data for each of the
+                                ! steps within the EVP solver.
 U_TRUNC_FILE = ""               ! default = ""
                                 ! The absolute path to the file where the accelerations
                                 ! leading to zonal velocity truncations are written.
@@ -469,6 +484,15 @@ STATISTICS_FILE = "seaice.stats" ! default = "seaice.stats"
 
 ! === module SIS_fast_thermo ===
 ! This module applies rapidly varying heat fluxes to the ice and does an implicit surface temperature calculation.
+REORDER_0C_HEATFLUX = False     !   [Boolean] default = False
+                                ! If true, rearrange the calculation of the heat fluxes
+                                ! projected back to 0C to work on each contribution
+                                ! separately, so that they can be indentically replicated
+                                ! if there is a single fast timestep per coupled timestep
+                                ! and REDO_FAST_ICE_UPDATE=True.
+MAX_TSKIN_ITT = 10              ! default = 10
+                                ! The maximum number of iterations of the skin temperature
+                                ! and optical properties during redo_update_ice_model_fast.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
