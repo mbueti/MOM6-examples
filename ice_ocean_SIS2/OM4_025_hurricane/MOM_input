@@ -39,7 +39,7 @@ BULKMIXEDLAYER = False          !   [Boolean] default = True
                                 ! NKML+NKBL have variable densities. There must be at
                                 ! least NKML+NKBL+1 layers if BULKMIXEDLAYER is true.
                                 ! The default is the same setting as ENABLE_THERMODYNAMICS.
-USE_REGRIDDING = True           !   [Boolean] default = False
+USE_REGRIDDING = False           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping).
                                 ! If False, use the layered isopycnal algorithm.
 THICKNESSDIFFUSE = True         !   [Boolean] default = False
@@ -48,7 +48,7 @@ THICKNESSDIFFUSE = True         !   [Boolean] default = False
 THICKNESSDIFFUSE_FIRST = True   !   [Boolean] default = False
                                 ! If true, do thickness diffusion before dynamics.
                                 ! This is only used if THICKNESSDIFFUSE is true.
-DT = 900.0                      !   [s]
+DT = 600.0                      !   [s]
                                 ! The (baroclinic) dynamics time step.  The time-step that
                                 ! is actually used will be an integer fraction of the
                                 ! forcing time-step (DT_FORCING in ocean-only mode or the
@@ -110,7 +110,7 @@ DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
                                 ! When TFREEZE_FORM=LINEAR,
                                 ! this is the derivative of the freezing potential
                                 ! temperature with pressure.
-PARALLEL_RESTARTFILES = True    !   [Boolean] default = False
+PARALLEL_RESTARTFILES = False    !   [Boolean] default = False
                                 ! If true, each processor writes its own restart file,
                                 ! otherwise a single restart file is generated
 
@@ -285,6 +285,21 @@ Z_INIT_FILE_SALT_VAR = "Salt"   ! default = "salt"
                                 ! TEMP_SALT_Z_INIT_FILE.
 Z_INIT_ALE_REMAPPING = True     !   [Boolean] default = False
                                 ! If True, then remap straight to model coordinate from file.
+DEPRESS_INITIAL_SURFACE = False !   [Boolean] default = False
+                                ! If true,  depress the initial surface to avoid huge
+                                ! tsunamis when a large surface pressure is applied.
+VELOCITY_CONFIG = "file"        ! default = "zero"
+                                ! A string that determines how the initial velocities
+                                ! are specified for a new run:
+                                !     file - read velocities from the file specified
+                                !       by (VELOCITY_FILE).
+                                !     zero - the fluid is initially at rest.
+                                !     uniform - the flow is uniform (determined by
+                                !       parameters INITIAL_U_CONST and INITIAL_V_CONST).
+                                !     rossby_front - a mixed layer front in thermal wind balance.
+                                !     soliton - Equatorial Rossby soliton.
+                                !     USER - call a user modified routine.
+VELOCITY_FILE = "MOM.vel.nc"
 
 ! === module MOM_MEKE ===
 USE_MEKE = True                 !   [Boolean] default = False
@@ -478,7 +493,7 @@ KHTH_MAX_CFL = 0.1              !   [nondimensional] default = 0.8
                                 ! ALE-based models.
 
 ! === module MOM_mixed_layer_restrat ===
-MIXEDLAYER_RESTRAT = True       !   [Boolean] default = False
+MIXEDLAYER_RESTRAT = False       !   [Boolean] default = False
                                 ! If true, a density-gradient dependent re-stratifying
                                 ! flow is imposed in the mixed layer. Can be used in ALE mode
                                 ! without restriction but in layer mode can only be used if

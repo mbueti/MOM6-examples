@@ -22,4 +22,4 @@ seaice.stats.*
 # Ignore anything labeled ignore
 *.ignore
 
-ice_ocean_SIS2/OM4_025_hurricane/INPUT/*
+ice_ocean_SIS2/OM4_025_hurricane/INPUT
