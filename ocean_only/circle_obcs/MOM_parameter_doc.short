@@ -47,16 +47,6 @@ RHO_0 = 1031.0                  !   [kg m-3] default = 1035.0
 NK = 10                         !   [nondim]
                                 ! The number of model layers.
 
-! === module MOM_tracer_registry ===
-
-! === module MOM_restart ===
-
-! === module MOM_tracer_flow_control ===
-USE_DOME_TRACER = True          !   [Boolean] default = False
-                                ! If true, use the DOME_tracer tracer package.
-
-! === module DOME_tracer ===
-
 ! === module MOM_fixed_initialization ===
 INPUTDIR = "INPUT"              ! default = "."
                                 ! The directory in which input files are found.
@@ -145,6 +135,16 @@ ROTATION = "beta"               ! default = "2omegasinlat"
 
 ! === module MOM_boundary_update ===
 
+! === module MOM_tracer_registry ===
+
+! === module MOM_restart ===
+
+! === module MOM_tracer_flow_control ===
+USE_DOME_TRACER = True          !   [Boolean] default = False
+                                ! If true, use the DOME_tracer tracer package.
+
+! === module DOME_tracer ===
+
 ! === module MOM_coord_initialization ===
 COORD_CONFIG = "layer_ref"      !
                                 ! This specifies how layers are to be defined:
@@ -180,6 +180,7 @@ THICKNESS_CONFIG = "circle_obcs" !
                                 !     coord - determined by ALE coordinate.
                                 !     uniform - uniform thickness layers evenly distributed
                                 !       between the surface and MAXIMUM_DEPTH.
+                                !     list - read a list of positive interface depths.
                                 !     DOME - use a slope and channel configuration for the
                                 !       DOME sill-overflow test case.
                                 !     ISOMIP - use a configuration for the

@@ -53,14 +53,6 @@ RHO_0 = 1031.0                  !   [kg m-3] default = 1035.0
 NK = 2                          !   [nondim]
                                 ! The number of model layers.
 
-! === module MOM_tracer_registry ===
-
-! === module MOM_restart ===
-MAX_FIELDS = 50                 ! default = 100
-                                ! The maximum number of restart fields that can be used.
-
-! === module MOM_tracer_flow_control ===
-
 ! === module MOM_fixed_initialization ===
 INPUTDIR = "INPUT"              ! default = "."
                                 ! The directory in which input files are found.
@@ -132,6 +124,14 @@ BETA = 2.0E-11                  !   [m-1 s-1] default = 0.0
                                 ! The northward gradient of the Coriolis parameter with
                                 ! the betaplane option.
 
+! === module MOM_tracer_registry ===
+
+! === module MOM_restart ===
+MAX_FIELDS = 50                 ! default = 100
+                                ! The maximum number of restart fields that can be used.
+
+! === module MOM_tracer_flow_control ===
+
 ! === module MOM_coord_initialization ===
 COORD_CONFIG = "gprime"         !
                                 ! This specifies how layers are to be defined:
@@ -167,6 +167,7 @@ THICKNESS_CONFIG = "phillips"   !
                                 !     coord - determined by ALE coordinate.
                                 !     uniform - uniform thickness layers evenly distributed
                                 !       between the surface and MAXIMUM_DEPTH.
+                                !     list - read a list of positive interface depths.
                                 !     DOME - use a slope and channel configuration for the
                                 !       DOME sill-overflow test case.
                                 !     ISOMIP - use a configuration for the
