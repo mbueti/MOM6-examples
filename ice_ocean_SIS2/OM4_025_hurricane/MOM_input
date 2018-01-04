@@ -288,7 +288,7 @@ Z_INIT_ALE_REMAPPING = True     !   [Boolean] default = False
 DEPRESS_INITIAL_SURFACE = False !   [Boolean] default = False
                                 ! If true,  depress the initial surface to avoid huge
                                 ! tsunamis when a large surface pressure is applied.
-VELOCITY_CONFIG = "file"        ! default = "zero"
+VELOCITY_CONFIG = "zero"        ! default = "zero"
                                 ! A string that determines how the initial velocities
                                 ! are specified for a new run:
                                 !     file - read velocities from the file specified
@@ -632,7 +632,7 @@ MSTAR = 1.0328                  !   [units=nondim] default = 1.2
 MIX_LEN_EXPONENT = 1.0          !   [units=nondim] default = 2.0
                                 ! The exponent applied to the ratio of the distance to the MLD
                                 ! and the MLD depth which determines the shape of the mixing length.
-MSTAR_FIXED = False             !   [units=nondim] default = True
+MSTAR_MODE = 2             !   [units=nondim] default = True
                                 ! True to use a fixed value of mstar, if false mstar depends
                                 ! on the composite Obhukov length and Ekman length.
 NSTAR = 0.08                    !   [nondim] default = 0.2

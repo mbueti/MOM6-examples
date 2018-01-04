@@ -26,10 +26,10 @@
             months = 0,
             days   = 0,
             hours  = 3,
-            current_date = 1990,1,1,0,0,0,
+            current_date = 1985,1,1,0,0,0,
             calendar = 'NOLEAP',
-            dt_cpld = 1200,
-            dt_atmos = 1200,
+            dt_cpld = 20,
+            dt_atmos = 20,
             do_atmos = .false.,
             do_land = .false.,
             do_ice = .true.,
@@ -42,7 +42,6 @@
 /
 
  &diag_manager_nml
-            conserve_water=.false.
             max_axes = 100,
             max_files = 63,
             max_num_axis_sets = 100,
