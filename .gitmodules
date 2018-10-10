@@ -18,7 +18,8 @@
 	url = https://github.com/NOAA-GFDL/icebergs.git
 [submodule "src/coupler"]
 	path = src/coupler
-	url = https://github.com/NOAA-GFDL/coupler.git
+	url = https://github.com/mbueti/coupler.git
+	branch = mom6_hurricane
 [submodule "src/atmos_null"]
 	path = src/atmos_null
 	url = https://github.com/NOAA-GFDL/atmos_null.git
